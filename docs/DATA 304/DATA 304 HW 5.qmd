@@ -1,0 +1,197 @@
+---
+title: "HW 5 QMD"
+author: "Aaron Toth"
+date: "2024-02-17"
+output:
+  html_document:
+    toc: true
+    theme: readable
+---
+
+```{python}
+import pandas as pd 
+import altair as alt 
+alt.data_transformers.disable_max_rows()
+
+```
+
+## Part 1: 
+
+```{python}
+jobs_url = "https://cdn.jsdelivr.net/npm/vega-datasets@2.8.0/data/jobs.json"
+jobs = pd.read_json(jobs_url)
+
+## altair takes strings for "temporal" to work
+jobs["year"] = jobs["year"].astype('str')
+print(jobs[0:4])
+
+```
+
+Use these data to create some visualizations
+
+Make a scatter showing the percent of men and women in various occupations 1950 and 2000.
+add a tooltip by adding tooltip = [] (array of fields in tooltip) to the encoding (Bonus: Add interaction to select the two years.)
+
+```{python}
+jobs1 = jobs[jobs["year"].isin(["1950", "2000"])]
+
+## chart 1 
+chart1 = alt.Chart(jobs1).mark_circle().encode(
+  alt.X(field = "year", type = "temporal"),
+  alt.Y(field = "perc", type = "quantitative"),
+  alt.Color(field = "sex"),
+  tooltip = ['job']).facet(
+    column = "sex"
+)
+
+chart1
+```
+
+
+Create a time series showing the percent of men and women in different occupations over time. Start with all the occupations, then decide if you want to restrict your attention to just some occupations.
+
+```{python}
+jobs2 = jobs[jobs["job"].isin(["Economist", "Accountant / Auditor", "Real Estate Agent", "Salesman", "Statistician / Actuary", "Stock Broker"])]
+
+# leave out "Professor - Economics" and Creditor" because they are 0 for some reason 
+
+## chart 2 
+chart2 = alt.Chart(jobs2).mark_line(point = True).encode(
+  alt.X(field = "year", type = "temporal"),
+  alt.Y(field = "perc", type = "quantitative"),
+  alt.Color(field = "sex").scale(scheme = 'magma'),
+  tooltip = ['count', 'year']).facet(
+    column = "job"
+).properties(
+  title = alt.Title("Jobs in Finance and Economics", subtitle = "Women surpass men in accounting and as real estate agents yet lag behind in other subfields")
+).resolve_scale(
+  y = 'independent'
+)
+
+chart2
+```
+
+Create additional graphics with these data.
+
+```{python}
+
+## chart 3 
+chart3 = alt.Chart(jobs).transform_pivot(
+    'sex',
+    groupby=['job'],
+    value='count'
+).mark_circle().encode(
+  alt.X(field = "women", type = "quantitative"),
+  alt.Y(field = "men", type = "quantitative"),
+  tooltip = ['job']
+)
+
+chart3
+
+```
+```{python}
+## chart 4, a reimagined chart 1
+chart4 = alt.Chart(jobs1).mark_bar().encode(
+  x = 'year:O',
+  y = 'count:Q',
+  color = 'job:N',
+  tooltip = 'job:N',
+  column = 'sex:N'
+)
+
+chart4
+
+```
+
+This last one is kinda ugly... perhaps a work in progress - I am not sure how to facet by multiple things 
+
+
+## Part 2: 
+
+
+Create a choropleth map of the World using one of the variables in countries, gapminder, or gapminder-health-income from https://cdn.jsdelivr.net/npm/vega-datasets@1.29.0/data/. (Or use some other data of your choosing – but note that you will need country names to match.)
+
+```{python}
+## getting vega data
+from vega_datasets import data
+
+## data from prof pruim
+gapminder_url = "https://cdn.jsdelivr.net/npm/vega-datasets@1.29.0/data/gapminder.json"
+gapminder = pd.read_json(gapminder_url)
+
+
+## getting the codes 
+## - https://gist.github.com/radcliff/f09c0f88344a7fcef373#file-wikipedia-iso-country-codes-csv
+# iso = pd.read_csv("wikipedia-iso-country-codes.csv")
+# iso = iso[["English short name lower case", "Numeric code"]]
+# iso.rename(columns={"English short name lower case": "country", "Numeric code": "id"}, inplace=True)
+
+## performing the join
+# gapminder = pd.merge(gapminder, iso, how="left", on="country")
+
+
+## a whole new JSON
+import json 
+from urllib.request import urlopen
+world2_url = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'
+world2 = json.load(urlopen(world2_url))
+
+
+## making the map
+world = alt.topo_feature(world2_url, feature='countries')
+chart5 = alt.Chart(world).mark_geoshape().transform_lookup(
+    lookup ='properties.name',
+    from_ = alt.LookupData(data=gapminder, key='country', fields=["fertility"])
+).encode(
+  color = 'fertility:Q'
+    )
+    
+chart5.properties(width = 800, height = 300)
+
+```
+
+
+Create a choropleth map of the United States where color shows the number of airports in each state.
+
+```{python}
+## airports data
+airports = data.airports()
+
+
+## wrangling adapted from CS 106 
+airports_by_state = (
+  airports
+  .groupby("state", as_index=False)
+  .agg(total_airports = ('name', 'count'))
+)
+
+## getting state codes 
+## - https://stackoverflow.com/questions/66892810/using-transform-lookup-for-an-altair-choropleth-figure
+ansi = pd.read_csv('https://www2.census.gov/geo/docs/reference/state.txt', sep='|')
+ansi.columns = ['id', 'state', 'full_state', 'statens']
+ansi = ansi[['id', 'state']]
+
+## joining the data
+airports_by_state = pd.merge(airports_by_state, ansi, how="left", on="state")
+
+## making the map
+states = alt.topo_feature(data.us_10m.url, 'states')
+
+chart6 = alt.Chart(states).mark_geoshape(stroke = "gray").transform_lookup(
+    lookup ='id',
+    from_ = alt.LookupData(data=airports_by_state, key='id', fields=["state", "total_airports"])
+).project(
+    type='albersUsa'
+).encode(
+  color = 'total_airports:Q'
+)
+
+chart6
+
+```
+
+
+
+
+
+"
