@@ -1,0 +1,16 @@
+Visit one of the visualization galleries listed below. Pick one graphic that you particularly like and analyze it.
+Here is the graphic I chose: 
+https://www.reddit.com/r/dataisbeautiful/comments/m8bf6a/oc_i_compressed_30_years_of_us_interest_rate/ 
+
+What is the main story of this graphic?
+The title encapsulates the story this graphic is trying to tell. “Is the yield curve really that steep,” it reads. The graphic is subverting an expectation that economists have about longer term government debt being higher yield (as it is ostensibly more risky). The theoretical curve is usually taught in economics courses as just “upward sloping,” approximating a log or square root function. 
+
+What makes it a good graphic?
+Not only does this graph subvert expectations, it also displays a massive amount of data. Each month’s yield curve is highlighted and then plotted in the background dating back to 1991. In the end, you can see all of the different shapes that the curve has taken in the past 30 years. 
+As someone who knows what they’re looking for, I could spot what economists call a “yield curve inversion” in 2000, 2007, and 2019. These are typically a sign of an upcoming recession. I think the graph maybe could have done more to highlight these inversions to show that, while the curves are flatter than typically imagined, any negative sloping still predicts a recession. 
+
+What features do you think you would know how to implement in Vega-lite?
+I can fit curves to data and plot them over each other and I could probably figure out how to make them appear one at a time as an animation plays. I could also do the color mapped to year fairly easily.
+
+Are there any features of the graphic that you would not know how to do in Vega-lite? If so, list them.
+However, I have no idea how to make lines appear bolded and white at first and then change to a thinner, colored line after the year ticks over. Maybe this could be a good final project to add to the portfolio (with a different curve or different country)? 
