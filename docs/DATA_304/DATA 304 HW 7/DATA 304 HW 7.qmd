@@ -1,0 +1,358 @@
+---
+title: "HW 7 QMD"
+author: "Aaron Toth"
+date: "2024-02-17"
+output:
+  html_document:
+    toc: true
+    theme: readable
+---
+
+```{python}
+import pandas as pd 
+import altair as alt 
+import numpy as np
+alt.data_transformers.disable_max_rows()
+
+```
+
+
+# Data and Graphics Challenge
+
+Challenge: Create graphics to compare gas prices in $ per gallon. Take advantage of the countries/regions/codes data to do things like use 3-letter codes for countries, group them by region, etc.
+
+```{python}
+## reading in the data
+gas_prices = pd.read_csv("pump_price_for_gasoline_us_per_liter.csv")
+country_codes = pd.read_csv("CountryCodes.csv")
+
+## tidying - DO NOT RERUN THIS LINE
+gas_prices = gas_prices.melt(id_vars = 'country', var_name = 'year', value_name = 'price of gas')
+
+## rename country codes
+country_codes.rename(columns = {'name':'country'}, inplace=True)
+
+## getting rid of some years/countries with no observations 
+gas_prices.dropna(subset= 'price of gas', inplace=True)
+
+## don't know about this 
+gas_prices.replace({'80µ' : '0.8'}, inplace= True)
+
+## convert to gallons 
+gas_prices= gas_prices.astype({'price of gas' : 'float'})
+gas_prices['price of gas'] = gas_prices['price of gas']* 3.78541
+
+```
+
+```{python}
+## making names match -- this took about an hour of copy pasting... feel free to give this to future students 
+
+country_codes.replace({
+  'Bolivia (Plurinational State of)' : 'Bolivia',
+  'Brunei Darussalam' : 'Brunei',
+  'Cabo Verde' : 'Cape Verde',
+  'Congo' : 'Congo, Rep.',
+  'Congo, Democratic Republic of the' : 'Congo, Dem. Rep.',
+  "Côte d'Ivoire" : "Cote d'Ivoire",
+  'Czechia' : 'Czech Republic',
+  'Iran (Islamic Republic of)' : 'Iran',
+  "Lao People's Democratic Republic" : "Laos",
+  'Moldova, Republic of' : 'Moldova',
+  "Korea (Democratic People's Republic of)" : "North Korea",
+  'Palestine, State of' : 'Palestine',
+  'Russian Federation' : 'Russia',
+  'Korea, Republic of' : 'South Korea',
+  'Syrian Arab Republic' : 'Syria',
+  'Tanzania, United Republic of' : 'Tanzania',
+  'United Kingdom of Great Britain and Northern Ireland' : 'United Kingdom',
+  'Venezuela (Bolivarian Republic of)' : 'Venezuela',
+  'Viet Nam' : 'Vietnam'
+
+  
+}, inplace= True)
+
+gas_prices.replace({
+  'Hong Kong, China' : 'Hong Kong', 
+  'Kyrgyz Republic' : 'Kyrgyzstan',
+  "Lao" : "Laos",
+  'UAE' : 'United Arab Emirates',
+  'UK' : 'United Kingdom',
+  'USA' : 'United States of America'
+
+
+}, inplace= True)
+
+```
+
+```{python}
+## had to use pd.merge, not pd.join!
+gas_data = gas_prices.merge(country_codes, on= 'country', how= 'left')
+
+## gave up on Kosovo and Slovak Republic 
+gas_data.dropna(subset= 'region', inplace=True)
+
+```
+
+```{python}
+## graphic
+
+gaschart = alt.Chart(gas_data).mark_boxplot().encode(
+    alt.X(field = "region", type = "ordinal"),
+    alt.Y(field = "price of gas", type = "quantitative"),
+    alt.Color(field = 'region')
+)
+gaschart
+
+```
+
+
+# World Values Survey
+
+Chapter 1 of Healy (2019) includes and example based on some data from the World Values Survey. Figures 1.8 and 1.9, which you were asked about on HW 6, show graphics made from these data.
+
+I’ve put a similar data set at https://calvin-data304.netlify.app/data/wvs.csv. My version includes data from the most recent wave (6th or 7th) of this survey for nine countries. This is a small subset of the data available at Inglehart (2022). It doesn’t exactly match the data from Healy (2019), but includes data on the same survey question (about the importance of democracy).
+
+Now it is your turn to use graphics to explore these data. Add your graphics to your website.
+
+## 2
+Create a graphic that shows how many respondents there were in each country. Present the countries in an order that is more interesting than alphabetical. Were they roughly equal or were there notable difference among the countries?
+
+```{python}
+## reading in WVS data
+wvs = pd.read_csv("wvs.csv")
+
+```
+
+```{python}
+## counting up the number of respondents in each country in this dataset 
+resp_by_country = (
+  wvs
+  .groupby('country', as_index=False)
+  .agg(resp_count = ('respondent_number_orig', 'count'))
+)
+
+```
+
+```{python}
+## chart of where respondents came from 
+## don't know why my sort argument is not working 
+WVSchart2 = alt.Chart(resp_by_country).mark_bar().encode(
+    alt.X(field = "country", type = "nominal", sort= '-y'),
+    alt.Y(field = "resp_count", type = "quantitative"),
+    alt.Color(field = 'country')
+)
+WVSchart2
+
+```
+
+
+## 3 
+There are three age-related variables: `age`, `age3`, and `age6.` The latter two put respondents into 3 and 6 age groups respectively. Create graphics that let you see what the age groupings are and check whether these are the same across all the countries.
+
+```{python}
+## graphing 
+WVSbase3 = alt.Chart(wvs).mark_circle().encode(
+    alt.X(field = "age", type = "quantitative", sort= '-x')
+)
+
+WVSage= WVSbase3.encode(alt.Y(field = 'age', type = "quantitative"))
+WVSage3= WVSbase3.encode(alt.Y(field = 'age3', type = "quantitative"))
+WVSage6= WVSbase3.encode(alt.Y(field = 'age6', type = "quantitative"))
+
+WVSage | WVSage3 | WVSage6
+
+```
+
+- It appears `age3` and `age6` are attempts to arbitrarily discretize age further... I think these are more confusing than just presenting something like `age` or even the median age. BUT they can be helpful for making graphics. 
+
+
+For the next few questions, you will need a new mark. The errorband mark creates bands of various sorts. To get confidence interval error bands, use mark_erroband(extent = "ci") in Altair. You can find out more about this mark in the documentation.
+
+## 3 again 
+
+Recreate something like Figure 1.8. Use `age6` or something derived from it.
+- Our dataset has more countries than the one in the text. Does that cause you to do anything differently?
+- How will you calculate the proportion of respondents in each country who responded with a value of 10?
+
+```{python}
+## calculate respondents by age group
+resp_by_country_age = (
+  wvs
+  .groupby(['country', 'age6'], as_index=False)
+  .agg(resp_count = ('respondent_number_orig', 'count'))
+)
+
+## calculate average response by age group
+avg_dem_score = (
+  wvs
+  .groupby(['country', 'age6'], as_index=False)
+  .agg(avg_dem_score = ('democracy_importance', 'mean'))
+)
+
+## filter to only those who gave democracy 10/10
+essential_percent = wvs.query('democracy_importance == 10')
+essential_percent = pd.DataFrame(essential_percent)
+
+## calculate the percent of respondents who gave democracy 10/10 
+essential_percent = (
+  essential_percent
+  .groupby(['country', 'age6'], as_index=False)
+  .agg(resp_count=('respondent_number_orig', 'count'))
+  .rename(columns = {'resp_count' : 'tens_count'})
+)
+
+```
+
+```{python}
+## bringing the datasets together
+percent_tens = pd.merge(resp_by_country_age, essential_percent)
+percent_tens['percent_who_say_essential'] = (
+  (percent_tens['tens_count']/percent_tens['resp_count'])*100
+)
+
+democracy_data = pd.merge(percent_tens, avg_dem_score)
+#democracy_data
+
+```
+
+
+```{python}
+## THROW OUT OTHER DATA WRANGLING (good practice though)
+
+## making the 1s and 0s
+wvs['democracy_importance_bool'] = wvs['democracy_importance'] == 10
+
+
+
+```
+
+
+
+```{python}
+## recreate figure 1.8 from HW 7
+graphic_8_lines = alt.Chart(wvs).mark_line().encode(
+    alt.X(field = "age6", type = "nominal"),
+    alt.Y(field = 'democracy_importance_bool', type = 'quantitative', aggregate = 'mean')
+)
+
+graphic_8_bands = alt.Chart(wvs).mark_errorband(extent = "ci").encode(
+  alt.X(field = "age6", type = "nominal"),
+  alt.Y(field = 'democracy_importance_bool', type = 'quantitative')
+)
+
+alt.layer(graphic_8_lines, graphic_8_bands).facet(
+  column = "country"
+)
+
+```
+
+
+
+## 4 
+
+Recreate something like Figure 1.9. Use age6 or something derived from it.
+
+```{python}
+## recreate figure 1.9 from HW 7
+graphic_9_lines = alt.Chart(wvs).mark_line().encode(
+    alt.X(field = "age6", type = "nominal"),
+    alt.Y(field = 'democracy_importance', type = 'quantitative', aggregate = 'mean')
+)
+
+graphic_9_bands = alt.Chart(wvs).mark_errorband(extent = "ci").encode(
+  alt.X(field = "age6", type = "nominal"),
+  alt.Y(field = 'democracy_importance', type = 'quantitative')
+)
+
+alt.layer(graphic_9_lines, graphic_9_bands).facet("country", columns = 3)
+
+```
+
+
+## 5 
+What happens if you use age instead of age6? Try it and see? Is this better or worse? Why?
+
+
+```{python}
+## calculate average response by age 
+# age_cont = (
+#   wvs
+#   .groupby(['country', 'age'], as_index=False)
+#   .agg(avg_dem_score = ('democracy_importance', 'mean'))
+# )
+
+## graph that 
+age_graph_lines = alt.Chart(wvs).mark_line().encode(
+    alt.X(field = "age", type = "quantitative"),
+    alt.Y(field = 'democracy_importance', type = 'quantitative', aggregate = 'mean')
+)
+
+age_graph_bands = alt.Chart(wvs).mark_errorband(extent = "ci").encode(
+  alt.X(field = "age", type = "quantitative"),
+  alt.Y(field = 'democracy_importance', type = 'quantitative')
+)
+
+alt.layer(age_graph_lines, age_graph_bands).facet(
+  column = "country"
+)
+
+```
+
+
+## 6 
+Instead of binning the ages, computing the average for each bin, and then “connecting the dots”, here is another option: we can use LOESS (LOcally Estimated Scatterplot Smoothing). Give it a try.
+
+Here’s the documentation. How do you like the result compared to the graphics you have already made? [Note: As far as I can tell, Vega-lite does not support computing errorband data for the LOESS transformation, so you don’t need error bands on this one.1]
+
+If you want to know more about LOESS, there are many online resources, including a reasonably good Wikipedia article. Here’s a paragraph from that article that summarizes the big ideas:
+
+
+> At each point in the range of the data set a low-degree polynomial is fitted to a subset of the data, with explanatory variable values near the point whose response is being estimated. The polynomial is fitted using weighted least squares, giving more weight to points near the point whose response is being estimated and less weight to points further away. The value of the regression function for the point is then obtained by evaluating the local polynomial using the explanatory variable values for that data point. The LOESS fit is complete after regression function values have been computed for each of the data points. Many of the details of this method, such as the degree of the polynomial model and the weights, are flexible. The range of choices for each part of the method and typical defaults are briefly discussed next.
+
+
+```{python}
+## LOESS chart showing the distributions of how age groups feel about democracy on average between countries
+LOESS_chart = alt.Chart(democracy_data).mark_point().encode(
+    alt.X(field = 'age6', type = 'nominal'),
+    alt.Y(field= 'avg_dem_score', type='quantitative').scale(domain=(7, 10)),
+    alt.Color(field= 'country')
+).properties(width=400, height=400)
+
+LOESS_chart + LOESS_chart.transform_loess(on= 'age6', loess= 'avg_dem_score', groupby= ['country']).mark_line()
+
+
+```
+
+
+## 7 
+
+Vega-lite can also compute fits for some regression models. This makes it easy to add “trend lines” to a scatter plot (or show the trendline without the scatter). Here is the documentation. Create two graphics, one using linear regression and one using polynomial regression.
+
+
+```{python}
+## linear model
+linear_model = alt.Chart(democracy_data).mark_point().encode(
+    alt.X(field = 'age6', type = 'nominal'),
+    alt.Y(field= 'avg_dem_score', type='quantitative').scale(domain=(7, 10)),
+    alt.Color(field= 'country')
+).properties(width=400, height=400)
+
+linear_model + linear_model.transform_regression(on= 'age6', regression= 'avg_dem_score', method= 'linear', groupby= ['country']).mark_line()
+
+```
+
+```{python}
+## polynomial model
+polynomial_model = alt.Chart(democracy_data).mark_point().encode(
+    alt.X(field = 'age6', type = 'nominal'),
+    alt.Y(field= 'avg_dem_score', type='quantitative').scale(domain=(7, 10)),
+    alt.Color(field= 'country')
+).properties(width=400, height=400)
+
+polynomial_model + polynomial_model.transform_regression(on= 'age6', regression= 'avg_dem_score', method= 'poly', order= 3, groupby= ['country']).mark_line()
+
+```
+Not sure why the `age6` variable has gone crazy with axis labels here... 
+
+
+
