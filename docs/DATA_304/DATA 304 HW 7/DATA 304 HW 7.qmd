@@ -15,7 +15,15 @@ import numpy as np
 alt.data_transformers.disable_max_rows()
 
 ```
+State of the document:
 
+All of the graphics work now! 
+
+Things that are less-than-ideal include:
+- Axis labels and titles 
+- Some graphics could benefit from facets or customizing existing facets 
+
+I hope to do a better job of these on the final portfolio, but now I am going to California to make some music! 
 
 # Data and Graphics Challenge
 
@@ -312,16 +320,34 @@ If you want to know more about LOESS, there are many online resources, including
 
 ```{python}
 ## LOESS chart showing the distributions of how age groups feel about democracy on average between countries
-LOESS_chart = alt.Chart(democracy_data).mark_point().encode(
-    alt.X(field = 'age6', type = 'nominal'),
-    alt.Y(field= 'avg_dem_score', type='quantitative').scale(domain=(7, 10)),
+LOESS_chart = alt.Chart(wvs).mark_point().encode(
+    alt.X(field = 'age', type = 'quantitative'),
+    alt.Y(field = 'democracy_importance', type = 'quantitative', aggregate = 'mean').scale(domain=(5, 10)),
     alt.Color(field= 'country')
 ).properties(width=400, height=400)
 
-LOESS_chart + LOESS_chart.transform_loess(on= 'age6', loess= 'avg_dem_score', groupby= ['country']).mark_line()
+
+ 
+LOESS_bands = alt.Chart(wvs).mark_errorband(extent = "ci").encode(
+  alt.X(field = "age", type = "quantitative"),
+  alt.Y(field = 'democracy_importance', type = 'quantitative').scale(domain=(5, 10)),
+  alt.Color(field= 'country')
+) 
+  
+
+  
+alt.layer(LOESS_bands, LOESS_chart, LOESS_chart.transform_loess(
+  on= 'age', 
+  loess='democracy_importance', 
+  groupby= ['country']
+  ).mark_line()
+).facet(
+  column = "country"
+  )
 
 
 ```
+These look good! The errorbands are a bit wacky sometimes, but that may just be because we don't have many observations for some ages. 
 
 
 ## 7 
@@ -331,28 +357,27 @@ Vega-lite can also compute fits for some regression models. This makes it easy t
 
 ```{python}
 ## linear model
-linear_model = alt.Chart(democracy_data).mark_point().encode(
-    alt.X(field = 'age6', type = 'nominal'),
-    alt.Y(field= 'avg_dem_score', type='quantitative').scale(domain=(7, 10)),
+linear_model = alt.Chart(wvs).mark_point().encode(
+    alt.X(field = 'age', type = 'quantitative'),
+    alt.Y(field = 'democracy_importance', type = 'quantitative', aggregate = 'mean').scale(domain=(5, 10)),
     alt.Color(field= 'country')
 ).properties(width=400, height=400)
 
-linear_model + linear_model.transform_regression(on= 'age6', regression= 'avg_dem_score', method= 'linear', groupby= ['country']).mark_line()
+linear_model + linear_model.transform_regression(on= 'age', regression= 'democracy_importance', method= 'linear', groupby= ['country']).mark_line()
 
 ```
 
 ```{python}
 ## polynomial model
-polynomial_model = alt.Chart(democracy_data).mark_point().encode(
-    alt.X(field = 'age6', type = 'nominal'),
-    alt.Y(field= 'avg_dem_score', type='quantitative').scale(domain=(7, 10)),
+polynomial_model = alt.Chart(wvs).mark_point().encode(
+    alt.X(field = 'age', type = 'quantitative'),
+    alt.Y(field = 'democracy_importance', type = 'quantitative', aggregate = 'mean').scale(domain=(5, 10)),
     alt.Color(field= 'country')
 ).properties(width=400, height=400)
 
-polynomial_model + polynomial_model.transform_regression(on= 'age6', regression= 'avg_dem_score', method= 'poly', order= 3, groupby= ['country']).mark_line()
+polynomial_model + polynomial_model.transform_regression(on= 'age', regression= 'democracy_importance', method= 'poly', order= 3, groupby= ['country']).mark_line()
 
 ```
-Not sure why the `age6` variable has gone crazy with axis labels here... 
 
 
 
