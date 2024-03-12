@@ -9,7 +9,7 @@
 <meta name="author" content="Aaron Toth">
 <meta name="dcterms.date" content="2024-03-12">
 
-<title>Keep Learning</title>
+<title>Palette Checklist</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,16 +25,16 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="Keep_Learning_files/libs/clipboard/clipboard.min.js"></script>
-<script src="Keep_Learning_files/libs/quarto-html/quarto.js"></script>
-<script src="Keep_Learning_files/libs/quarto-html/popper.min.js"></script>
-<script src="Keep_Learning_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="Keep_Learning_files/libs/quarto-html/anchor.min.js"></script>
-<link href="Keep_Learning_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Keep_Learning_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="Keep_Learning_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="Keep_Learning_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="Keep_Learning_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="Palette_Checklist_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Palette_Checklist_files/libs/quarto-html/quarto.js"></script>
+<script src="Palette_Checklist_files/libs/quarto-html/popper.min.js"></script>
+<script src="Palette_Checklist_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Palette_Checklist_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Palette_Checklist_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Palette_Checklist_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Palette_Checklist_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Palette_Checklist_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Palette_Checklist_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -47,7 +47,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Keep Learning</h1>
+<h1 class="title">Palette Checklist</h1>
 </div>
 
 
@@ -74,28 +74,12 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p><strong>a. Cite 2 or 3 specific examples in the graphics in your portfolio where you used a feature of Altair that we did not learn in class. This might be using a new kind of mark or transform, or a way to customize a feature of the graphic, or a way to use interaction, or…</strong></p>
-<ol type="1">
-<li><p>The first thing I learned was how to use <code>.mark_rule()</code> to add custom lines to plots. These can be used to emphasize sections of the graphic such as an axis, expectation, or logical boundary.</p></li>
-<li><p>I also learned a lot about how to deal with the quirkiness of <code>transform_lookup(</code>. Sometimes, in order to pass through more data and have it not match to only one observation, you have to give the function wide formatted data.</p></li>
-<li><p>Furthermore, I got to play with the <code>mark_text()</code> for the first time. I did some simple but highly customized labels.</p></li>
-</ol>
-<p><strong>b. You will also want to keep learning about principles of good graphics design. Cite 2 or 3 specific examples where you followed the advice in one of these resources. For the Knaflic book, provide specific page numbers. For the Wilke book provide at least section numbers. (Note: each section in that book has a URL which you could include as a link.)</strong></p>
-<ol type="1">
-<li>I had some timeseries data from my mango dataset. As <a href="https://clauswilke.com/dataviz/visualizing-trends.html#showing-trends-with-a-defined-functional-form">Wilke</a> writes:</li>
-</ol>
-<blockquote class="blockquote">
-<p>“When making scatter plots or time series , we are often more interested in the overarching trend of the data than in the specific detail of where each individual data point lies” (Chapter 14).</p>
-</blockquote>
-<p>This led me to connect my timeseries and scatterplot data, rather than just presenting the points. However, I was still dissatisfied. I wanted stacked bars to show the overall trend and a connected scatterplot to show progression.</p>
-<p>I settled on an <code>vl_mark_area</code> chart, which follows Wilke’s advice about continuity through timeseries and also gives me the stacking that I wanted.</p>
-<ol start="2" type="1">
-<li>When working on the New Challenge, I closely followed the design process and example of <a href="https://github.com/Saurav6789/Books-/blob/master/Storytelling%20with%20Data%20Let%E2%80%99s%20Practice%20by%20Cole%20Nussbaumer%20Knaflic%20(z-lib.org).pdf">Knaflic</a>. I drew multiple stretches and tried to decide which was best before I even started coding. Eventually, I settled on one similar to the one Knaflic makes on page 72. One thing I appreciate about his analysis of his version of the graphic is that he says:</li>
-</ol>
-<blockquote class="blockquote">
-<p>“I chose to label the lines (and also added data labels) at the ends of the lines, eliminating any confusion over which series is which and reducing the work of going back and forth between a legend and the data” (Page 72).</p>
-</blockquote>
-<p>Sometimes a simple graphic with good labels does the trick.</p>
+<p><strong>an encoding channel other than x or y b</strong> – This was present in every graphic that I made. In fact, color is mapped to data in each one.</p>
+<p><strong>facets</strong> – I used a facet on my second graphic for my HW 3 revision. While a really similar graphic could have been made using the precise <code>twin</code> on the x-axis, the facet makes each pair of twins look more distinct.</p>
+<p><strong>layers</strong> – My very first graphic in the HW 3 revision has layers for the different elements. The Choropleth map from HW 7 and the text labeling from the new challenge also include layering.</p>
+<p><strong>concatenation</strong> – This is most obvious in my mango masterpiece where I used vegabrite’s <code>vl_vconcat</code>. I also concatenated to create the first graphic in HW 3.</p>
+<p><strong>non-default configuration of a channel’s scale or guide</strong> – In the choropleth map from HW 7, I had to use <code>.scale(domainMax= 10, domainMin= 0, scheme = 'viridis')</code> to keep the color scale constant (default would have t change as the map animates).</p>
+<p><strong>interaction (tooltips, panning/zooming, brushing, etc.)</strong> – There are many of tooltips throughout each of the questions. The most interactive part is from the choropleth slider.</p>
 
 </main>
 <!-- /main column -->

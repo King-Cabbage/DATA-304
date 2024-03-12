@@ -1,7 +1,7 @@
 ---
 title: "Portfolio Index"
 author: "Aaron Toth"
-date: "2024-04-10"
+date: "2024-03-12"
 output:
   html_document:
     toc: true
@@ -10,17 +10,17 @@ output:
 
 **Graphics**
 
-[HW 3 Revision](~/Git/docs/DATA_304/DATA 304 Final Portfolio/1_HW_3_Revision/HW_3_Revision.html)
+[HW 3 Revision](1_HW_3_Revision/HW_3_Revision.html)
 
-[HW 7 Revision](~/Git/docs/DATA_304/DATA 304 Final Portfolio/2_HW_7_Revision/HW_7_Revision.html)
+[HW 7 Revision](2_HW_7_Revision/HW_7_Revision.html)
 
-[New Challenge](~/Git/docs/DATA_304/DATA 304 Final Portfolio/3_New_Challenge/New_Challenge.html)
+[New Challenge](3_New_Challenge/New_Challenge.html)
 
-[Mango Masterpiece](~/Git/docs/DATA_304/DATA 304 Final Portfolio/4_Mango_Masterpiece/Mango_Masterpiece.html)
+[Mango Masterpiece](4_Mango_Masterpiece/Mango_Masterpiece.html)
 
 
 **Supplementary Materials**
 
-[Palette Checklist](~/Git/docs/DATA_304/DATA 304 Final Portfolio/5_Palette_Checklist/Palette_Checklist.html)
+[Palette Checklist](5_Palette_Checklist/Palette_Checklist.html)
 
-[Keep Learning](~/Git/docs/DATA_304/DATA 304 Final Portfolio/6_Keep_Learning/Keep_Learning.html)
+[Keep Learning](6_Keep_Learning/Keep_Learning.html)

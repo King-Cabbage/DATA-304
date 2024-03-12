@@ -1,7 +1,7 @@
 ---
 title: "Keep Learning"
 author: "Aaron Toth"
-date: "2024-04-10"
+date: "2024-03-12"
 output:
   html_document:
     toc: true
@@ -15,13 +15,13 @@ output:
   
   2. I also learned a lot about how to deal with the quirkiness of `transform_lookup(`. Sometimes, in order to pass through more data and have it not match to only one observation, you have to give the function wide formatted data. 
   
-  3. Furthermore,00ay with the `mark_text()` for the first time. I did some simple but highly customized labels.
+  3. Furthermore, I got to play with the `mark_text()` for the first time. I did some simple but highly customized labels.
 
 
 
 **b. You will also want to keep learning about principles of good graphics design. Cite 2 or 3 specific examples where you followed the advice in one of these resources. For the Knaflic book, provide specific page numbers. For the Wilke book provide at least section numbers. (Note: each section in that book has a URL which you could include as a link.)**
   
-  1. I had some timseries data from my mango dataset. As [Wilke](https://clauswilke.com/dataviz/visualizing-trends.html#showing-trends-with-a-defined-functional-form) writes:
+  1. I had some timeseries data from my mango dataset. As [Wilke](https://clauswilke.com/dataviz/visualizing-trends.html#showing-trends-with-a-defined-functional-form) writes:
 
 > "When making scatter plots or time series , we are often more interested in the overarching trend of the data than in the specific detail of where each individual data point lies" (Chapter 14).
 
