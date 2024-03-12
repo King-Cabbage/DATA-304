@@ -14,4 +14,4 @@ Welcome Back!
 
 [Homework 7](DATA_304/DATA_304_HW_7/DATA_304_HW_7.html)
 
-[Final Portfolio](~/Git/docs/DATA_304/DATA_304_Final_Portfolio)
+[Final Portfolio](DATA_304/DATA_304_Final_Portfolio)
