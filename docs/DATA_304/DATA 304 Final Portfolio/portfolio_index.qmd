@@ -1,5 +1,5 @@
 ---
-title: "Keep Learning"
+title: "Portfolio Index"
 author: "Aaron Toth"
 date: "2024-04-10"
 output:
@@ -8,19 +8,18 @@ output:
     theme: readable
 ---
 
-**a. Cite 2 or 3 specific examples in the graphics in your portfolio where you used a feature of Altair that we did not learn in class. This might be using a new kind of mark or transform, or a way to customize a feature of the graphic, or a way to use interaction, or**
+**Graphics**
 
+[HW 3 Revision](https://github.com/King-Cabbage/DATA-304/blob/1783607b6b7a92765a75882ed0ddbe8642da983d/docs/DATA_304/DATA%20304%20Final%20Portfolio/1_HW_3_Revision/HW_3_Revision.html)
 
+[HW 7 Revision](https://github.com/King-Cabbage/DATA-304/blob/1783607b6b7a92765a75882ed0ddbe8642da983d/docs/DATA_304/DATA%20304%20Final%20Portfolio/2_HW_7_Revision/HW_7_Revision.html)
 
+[New Challenge](https://github.com/King-Cabbage/DATA-304/blob/1783607b6b7a92765a75882ed0ddbe8642da983d/docs/DATA_304/DATA%20304%20Final%20Portfolio/3_New_Challenge/New_Challenge.html)
 
+[Mango Masterpiece](https://github.com/King-Cabbage/DATA-304/blob/1783607b6b7a92765a75882ed0ddbe8642da983d/docs/DATA_304/DATA%20304%20Final%20Portfolio/4_Mango_Masterpiece/Mango_Masterpiece.html)
 
-**b. You will also want to keep learning about principles of good graphics design. Cite 2 or 3 specific examples where you followed the advice in one of these resources. For the Knaflic book, provide specific page numbers. For the Wilke book provide at least section numbers. (Note: each section in that book has a URL which you could inlcude as a link.)**
+Supplementary Materials
 
+[Palette Checklist]()
 
-
-
-
-
-
-
-
+[Keep Learning]()
