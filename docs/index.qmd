@@ -10,8 +10,8 @@ output:
 
 Welcome Back!
 
-[Homework 5](DATA_304_HW_5/DATA_304_HW_5.html)
+[Homework 5](DATA_304/DATA_304_HW_5/DATA_304_HW_5.html)
 
-[Homework 7](DATA_304_HW_7/DATA_304_HW_7.html)
+[Homework 7](DATA_304/DATA_304_HW_7/DATA_304_HW_7.html)
 
 [Final Portfolio](~/Git/docs/DATA_304/DATA_304_Final_Portfolio)
