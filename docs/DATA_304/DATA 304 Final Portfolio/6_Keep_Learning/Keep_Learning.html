@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Aaron Toth">
+<meta name="dcterms.date" content="2024-04-10">
 
-<title>index</title>
+<title>Keep Learning</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,16 +25,16 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="index_files/libs/clipboard/clipboard.min.js"></script>
-<script src="index_files/libs/quarto-html/quarto.js"></script>
-<script src="index_files/libs/quarto-html/popper.min.js"></script>
-<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="index_files/libs/quarto-html/anchor.min.js"></script>
-<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="index_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="Keep_Learning_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Keep_Learning_files/libs/quarto-html/quarto.js"></script>
+<script src="Keep_Learning_files/libs/quarto-html/popper.min.js"></script>
+<script src="Keep_Learning_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Keep_Learning_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Keep_Learning_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Keep_Learning_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Keep_Learning_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Keep_Learning_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Keep_Learning_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -43,12 +45,57 @@ ul.task-list li input[type="checkbox"] {
 
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Keep Learning</h1>
+</div>
 
 
-<p>Welcome Back!</p>
-<p><a href="Data%20304%20HW%205/DATA%20304%20HW%205.html">Homework 5</a></p>
-<p><a href="Data%20304%20HW%207/DATA%20304%20HW%207.html">Homework 7</a></p>
-<p><a href="~/Git/docs/DATA_304/DATA%20304%20Final%20Portfolio">Final Portfolio</a></p>
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Aaron Toth </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 10, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<p><strong>a. Cite 2 or 3 specific examples in the graphics in your portfolio where you used a feature of Altair that we did not learn in class. This might be using a new kind of mark or transform, or a way to customize a feature of the graphic, or a way to use interaction, or…</strong></p>
+<ol type="1">
+<li><p>The first thing I learned was how to use <code>.mark_rule()</code> to add custom lines to plots. These can be used to emphasize sections of the graphic such as an axis, expectation, or logical boundary.</p></li>
+<li><p>I also learned a lot about how to deal with the quirkiness of <code>transform_lookup(</code>. Sometimes, in order to pass through more data and have it not match to only one observation, you have to give the function wide formatted data.</p></li>
+<li><p>Furthermore,00ay with the <code>mark_text()</code> for the first time. I did some simple but highly customized labels.</p></li>
+</ol>
+<p><strong>b. You will also want to keep learning about principles of good graphics design. Cite 2 or 3 specific examples where you followed the advice in one of these resources. For the Knaflic book, provide specific page numbers. For the Wilke book provide at least section numbers. (Note: each section in that book has a URL which you could include as a link.)</strong></p>
+<ol type="1">
+<li>I had some timseries data from my mango dataset. As <a href="https://clauswilke.com/dataviz/visualizing-trends.html#showing-trends-with-a-defined-functional-form">Wilke</a> writes:</li>
+</ol>
+<blockquote class="blockquote">
+<p>“When making scatter plots or time series , we are often more interested in the overarching trend of the data than in the specific detail of where each individual data point lies” (Chapter 14).</p>
+</blockquote>
+<p>This led me to connect my timeseries and scatterplot data, rather than just presenting the points. However, I was still dissatisfied. I wanted stacked bars to show the overall trend and a connected scatterplot to show progression.</p>
+<p>I settled on an <code>vl_mark_area</code> chart, which follows Wilke’s advice about continuity through timeseries and also gives me the stacking that I wanted.</p>
+<ol start="2" type="1">
+<li>When working on the New Challenge, I closely followed the design process and example of <a href="https://github.com/Saurav6789/Books-/blob/master/Storytelling%20with%20Data%20Let%E2%80%99s%20Practice%20by%20Cole%20Nussbaumer%20Knaflic%20(z-lib.org).pdf">Knaflic</a>. I drew multiple stretches and tried to decide which was best before I even started coding. Eventually, I settled on one similar to the one Knaflic makes on page 72. One thing I appreciate about his analysis of his version of the graphic is that he says:</li>
+</ol>
+<blockquote class="blockquote">
+<p>“I chose to label the lines (and also added data labels) at the ends of the lines, eliminating any confusion over which series is which and reducing the work of going back and forth between a legend and the data” (Page 72).</p>
+</blockquote>
+<p>Sometimes a simple graphic with good labels does the trick.</p>
 
 </main>
 <!-- /main column -->

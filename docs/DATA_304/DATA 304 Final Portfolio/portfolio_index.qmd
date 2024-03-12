@@ -10,15 +10,16 @@ output:
 
 **Graphics**
 
-[HW 3 Revision](https://github.com/King-Cabbage/DATA-304/blob/1783607b6b7a92765a75882ed0ddbe8642da983d/docs/DATA_304/DATA%20304%20Final%20Portfolio/1_HW_3_Revision/HW_3_Revision.html)
+[HW 3 Revision](~/Git/docs/DATA_304/DATA 304 Final Portfolio/1_HW_3_Revision/HW_3_Revision.html)
 
-[HW 7 Revision](https://github.com/King-Cabbage/DATA-304/blob/1783607b6b7a92765a75882ed0ddbe8642da983d/docs/DATA_304/DATA%20304%20Final%20Portfolio/2_HW_7_Revision/HW_7_Revision.html)
+[HW 7 Revision]()
 
-[New Challenge](https://github.com/King-Cabbage/DATA-304/blob/1783607b6b7a92765a75882ed0ddbe8642da983d/docs/DATA_304/DATA%20304%20Final%20Portfolio/3_New_Challenge/New_Challenge.html)
+[New Challenge]()
 
-[Mango Masterpiece](https://github.com/King-Cabbage/DATA-304/blob/1783607b6b7a92765a75882ed0ddbe8642da983d/docs/DATA_304/DATA%20304%20Final%20Portfolio/4_Mango_Masterpiece/Mango_Masterpiece.html)
+[Mango Masterpiece]()
 
-Supplementary Materials
+
+**Supplementary Materials**
 
 [Palette Checklist]()
 

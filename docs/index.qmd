@@ -1,1 +1,7 @@
+Welcome Back!
+
 [Homework 5](Data 304 HW 5/DATA 304 HW 5.html)
+
+[Homework 7](Data 304 HW 7/DATA 304 HW 7.html)
+
+[Final Portfolio](~/Git/docs/DATA_304/DATA 304 Final Portfolio)

@@ -112,4 +112,4 @@ alt.layer(chart2, onerule, data= twins_long).facet(column = 'pair:O').properties
 
 For this chart I don't care about the differences between tests, so I took the average of the genetic share (made easier by the long data format). This allowed me to focus on the differences between twins while not excluding any information.
 
-This graphic follows the ideas of \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_FINISH ABOUT SIMPLE GRAPHICS\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
