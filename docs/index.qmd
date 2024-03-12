@@ -1,3 +1,13 @@
+---
+title: "Data 304 Portfolio"
+author: "Aaron Toth"
+date: "2024-03-12"
+output:
+  html_document:
+    toc: true
+    theme: readable
+---
+
 Welcome Back!
 
 [Homework 5](DATA_304_HW_5/DATA_304_HW_5.html)
