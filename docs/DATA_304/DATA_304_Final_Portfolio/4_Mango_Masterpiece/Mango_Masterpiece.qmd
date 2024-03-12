@@ -48,7 +48,8 @@ I have some timseries data here. As [Wilke](https://clauswilke.com/dataviz/visua
 
 > "When making scatter plots or time series , we are often more interested in the overarching trend of the data than in the specific detail of where each individual data point lies"
 
-This led me to connect my timeseries and scatterplot data, rather than just presenting the points. Wilke is also a fan of "smoothing," to show the "big picture," so I will try that as well.  
+This led me to connect my timeseries and scatterplot data, rather than just presenting the points. Wilke is also a fan of "smoothing," to show the "big picture," so I will try that as well. 
+
 
 ```{r}
 ## making my mango area chart
@@ -77,6 +78,10 @@ vl_vconcat(mango_area, mango_bar)
 
 
 ```
+
+I considered making a stacked bar chart, but that has less directionality than the area chart. I also started off with lines, but it was difficult to see any regions besides Southern Asia when they were not stacked. I chose to have the title emphasize the prominence of South Asia because it draws viewers' eyes to the large brown area on the graph. 
+
+
 
 I also started messing around with some of of the regression features after starting with the visualization There is definitely a better way to code this...
 

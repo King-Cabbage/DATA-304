@@ -24,3 +24,6 @@ output:
 [Palette Checklist](5_Palette_Checklist/Palette_Checklist.html)
 
 [Keep Learning](6_Keep_Learning/Keep_Learning.html)
+
+[Data Directory](Data)
+
