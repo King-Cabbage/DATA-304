@@ -1,0 +1,21 @@
+---
+title: "Palette Checklist"
+author: "Aaron Toth"
+date: "2024-04-10"
+output:
+  html_document:
+    toc: true
+    theme: readable
+---
+
+**an encoding channel other than x or y b** -- This was present in every graphic that I made. In fact, color is mapped to data in each one.
+
+**facets** -- I used a facet on my second graphic for my HW 3 revision. While a really similar graphic could have been made using the precise `twin` on the x-axis, the facet makes each pair of twins look more distinct.
+
+**layers** -- My very first graphic in the HW 3 revision has layers for the different elements. The Choropleth map from HW 7 and the text labeling from the new challenge also include layering.
+
+**concatenation** -- This is most obvious in my mango masterpiece where I used vegabrite's `vl_vconcat`. I also concatenated to create the first graphic in HW 3.
+
+**non-default configuration of a channel's scale or guide** -- In the choropleth map from HW 7, I had to use `.scale(domainMax= 10, domainMin= 0, scheme = 'viridis')` to keep the color scale constant (default would have t change as the map animates).
+
+**interaction (tooltips, panning/zooming, brushing, etc.)** -- There are many of tooltips throughout each of the questions. The most interactive part is from the choropleth slider.

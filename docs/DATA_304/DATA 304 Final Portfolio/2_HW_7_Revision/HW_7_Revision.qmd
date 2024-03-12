@@ -1,0 +1,147 @@
+---
+title: "HW 7 Revision"
+author: "Aaron Toth"
+date: "2024-04-10"
+output:
+  html_document:
+    toc: true
+    theme: readable
+---
+
+```{python}
+import pandas as pd 
+import altair as alt 
+import numpy as np
+alt.data_transformers.disable_max_rows()
+
+```
+
+**HW 7 revision**. Complete one of the data and graphics challenges that we didn't get to in class. This can be a revision and improvement of what you submitted for HW 7, or you can switch challenges.
+
+Challenge: Create graphics to compare gas prices in \$ per gallon. Take advantage of the countries/regions/codes data to do things like use 3-letter codes for countries, group them by region, etc.
+
+```{python}
+## reading in the data
+original_gas_prices = pd.read_csv("data/pump_price_for_gasoline_us_per_liter.csv")
+country_codes = pd.read_csv("data/CountryCodes.csv")
+
+## tidying - DO NOT RERUN THIS LINE
+gas_prices = original_gas_prices.melt(id_vars = 'country', var_name = 'year', value_name = 'price of gas')
+
+## rename country codes
+country_codes.rename(columns = {'name':'country'}, inplace=True)
+
+## getting rid of some years/countries with no observations 
+gas_prices.dropna(subset= 'price of gas', inplace=True)
+
+## Venezuela had some issues  
+gas_prices = gas_prices[gas_prices['country'] != 'Venezuela']
+
+## convert to gallons 
+gas_prices= gas_prices.astype({'price of gas' : 'float'})
+gas_prices['price of gas'] = gas_prices['price of gas']* 3.78541
+
+```
+
+```{python}
+## making names match 
+
+country_codes.replace({
+  'Bolivia (Plurinational State of)' : 'Bolivia',
+  'Brunei Darussalam' : 'Brunei',
+  'Cabo Verde' : 'Cape Verde',
+  'Congo' : 'Congo, Rep.',
+  'Congo, Democratic Republic of the' : 'Congo, Dem. Rep.',
+  "Côte d'Ivoire" : "Cote d'Ivoire",
+  'Czechia' : 'Czech Republic',
+  'Iran (Islamic Republic of)' : 'Iran',
+  "Lao People's Democratic Republic" : "Laos",
+  'Moldova, Republic of' : 'Moldova',
+  "Korea (Democratic People's Republic of)" : "North Korea",
+  'Palestine, State of' : 'Palestine',
+  'Russian Federation' : 'Russia',
+  'Korea, Republic of' : 'South Korea',
+  'Syrian Arab Republic' : 'Syria',
+  'Tanzania, United Republic of' : 'Tanzania',
+  'United Kingdom of Great Britain and Northern Ireland' : 'United Kingdom',
+  'Venezuela (Bolivarian Republic of)' : 'Venezuela',
+  'Viet Nam' : 'Vietnam'
+
+  
+}, inplace= True)
+
+gas_prices.replace({
+  'Hong Kong, China' : 'Hong Kong', 
+  'Kyrgyz Republic' : 'Kyrgyzstan',
+  "Lao" : "Laos",
+  'UAE' : 'United Arab Emirates',
+  'UK' : 'United Kingdom',
+  'USA' : 'United States of America'
+
+
+}, inplace= True)
+
+```
+
+```{python}
+## had to use pd.merge, not pd.join!
+gas_data = gas_prices.merge(country_codes, on= 'country', how= 'left')
+
+## gave up on Kosovo and Slovak Republic 
+gas_data.dropna(subset= 'region', inplace=True)
+
+```
+
+```{python}
+## 
+gas_data_long = gas_data.pivot(columns= 'year', values = 'price of gas', index= 'country').reset_index()
+
+```
+
+
+
+```{python}
+## a whole new JSON
+import json 
+from urllib.request import urlopen
+world2_url = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'
+world2 = json.load(urlopen(world2_url))
+
+## initializing a slider 
+
+#slider = alt.binding_range(min=1991, max=2016, step=1)
+
+input_dropdown = alt.binding_select(options=['1991','1992','1995','1998','2000','2002','2004','2006','2008','2010','2012','2014','2016'], name='year ')
+
+select_year = alt.param(name= 'yearr',
+                        bind= input_dropdown, 
+                        value= 1991)
+
+## making the map
+world = alt.topo_feature(world2_url, feature='countries')
+
+map_base = alt.Chart(world).mark_geoshape(stroke='gray', fill = "#eeeeee").properties(width = 800, height = 300, title= "Global gas prices fluctuate | 1991-2016"
+).project(type= 'equalEarth')
+
+gasmap = map_base.add_params(select_year
+).transform_lookup(
+    lookup ='properties.name',
+    from_ = alt.LookupData(
+      data= gas_data_long, 
+      key= 'country',
+      fields= gas_data_long.drop('country', axis=1).columns.values
+      )
+).transform_fold(
+  gas_data_long.drop('country', axis=1).columns.values, 
+  ['year', 'gas_price']
+).transform_filter('yearr == datum.year'
+).encode(
+  alt.Fill(field = "gas_price", type= 'quantitative').scale(
+    domainMax= 10, domainMin= 0, scheme = 'viridis'   ## set scale domain to be constant
+    ),
+  tooltip= ["gas_price:Q"]
+  )
+         
+map_base + gasmap
+
+```

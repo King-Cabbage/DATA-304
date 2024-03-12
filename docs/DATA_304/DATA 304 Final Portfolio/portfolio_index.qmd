@@ -1,0 +1,26 @@
+---
+title: "Keep Learning"
+author: "Aaron Toth"
+date: "2024-04-10"
+output:
+  html_document:
+    toc: true
+    theme: readable
+---
+
+**a. Cite 2 or 3 specific examples in the graphics in your portfolio where you used a feature of Altair that we did not learn in class. This might be using a new kind of mark or transform, or a way to customize a feature of the graphic, or a way to use interaction, or**
+
+
+
+
+
+**b. You will also want to keep learning about principles of good graphics design. Cite 2 or 3 specific examples where you followed the advice in one of these resources. For the Knaflic book, provide specific page numbers. For the Wilke book provide at least section numbers. (Note: each section in that book has a URL which you could inlcude as a link.)**
+
+
+
+
+
+
+
+
+

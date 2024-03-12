@@ -1,0 +1,115 @@
+---
+title: "HW 3 Revision"
+author: "Aaron Toth"
+date: "2024-04-10"
+output:
+  html_document:
+    toc: true
+    theme: readable
+---
+
+```{python}
+import pandas as pd 
+import altair as alt 
+import numpy as np
+alt.data_transformers.disable_max_rows()
+
+```
+
+**HW 3 revision**. We were just getting started with Vega-lite when you did HW 3. We've learned a lot about graphics since then, so here's your chance to improve upon what you did in HW 3. We are going to focus on the genetics kit data. See HW3 for a reminder about the data and the task you had to do then.
+
+Note: I think some of you did not understand what "genetic share" means. 23 and Me calls this "ancestry composition" and describes it like this:
+
+> Your Ancestry Composition report shows the percentage of your DNA that comes from each of 47 populations. We calculate your Ancestry Composition by comparing your genome to those of over 14,000 people with known ancestry. When a segment of your DNA closely matches the DNA from one of the 47 populations, we assign that ancestry to the corresponding segment of your DNA. We calculate the ancestry for individual segments of your genome separately, then add them together to compute your overall ancestry composition. Read more.
+
+The assignment:
+
+-   **Scroll through the HW 3 Gallery to see the plots we created at that time. Find an example that has that has something you like about it and explain what you like.**
+
+    I really like Noelle's first graphic for comparing twins. The stacked bar chart makes sense because `genetic share` should sum to 1.0, or 100%. The shares can be thought of as additive, which makes the stacked bar valuable. Furthermore, differences between twins are highlighted because there are only two bars and all three tests are shown through faceting.
+
+-   **Find an example that has something you don't like, and explain what you don't like about it.**
+
+    One thing that I saw in a few graphics that I didn't like is mapping `genetic share` to something without considering `genetic share` of *what*. The variable only contains information insofar as it describes the share of one's genome that an be traced back to a certain region of the world. One specific example of this comes from Gloria's first graphic, which tells us that 100% of each twin's genetic share comes from somewhere. It looks like the chart may be stacked though--in this case all she would have needed to do is map color to origin (but obviously we were just learning at this point).
+
+-   **Now create two graphics, one that helps compare the kits and one that helps compare twins. Give your graphics good titles and use other principles of good visualization.** **Include a paragraph that tells the story of your graphic.**
+
+```{python}
+## reading in the data 
+twins_long_url = "https://calvin-data304.netlify.app/data/twins-genetics-long.json"
+twins_long = pd.read_json(twins_long_url)
+
+twins_wide_url = "https://calvin-data304.netlify.app/data/twins-genetics-wide.json"
+twins_wide = pd.read_json(twins_wide_url)
+
+```
+
+-   **Comparing Kits**
+
+```{python}
+## setting up all the parameters 
+kits = ['Ancestry', '23andMe', 'MyHeritage']
+
+
+## making the repeat chart 
+base = alt.Chart(twins_wide).mark_point().properties(
+  width = 160, height = 160
+)
+
+chart1 = base.encode(
+    alt.X(field = 'Ancestry', type = "quantitative"),
+    alt.Y(field = '23andMe', type = "quantitative"),
+    color = 'region')
+    
+chart2 = base.encode(
+    alt.X(field = 'Ancestry', type = "quantitative"),
+    alt.Y(field = 'MyHeritage', type = "quantitative"),
+    color = 'region') 
+    
+chart3 = base.encode(
+    alt.X(field = '23andMe', type = "quantitative"),
+    alt.Y(field = 'MyHeritage', type = "quantitative"),
+    color = 'region')   
+
+xyrule = alt.Chart().mark_rule().encode(
+  x = alt.datum(0),
+  x2 = alt.datum(1),
+  y = alt.datum(0),
+  y2 = alt.datum(1))
+
+((chart1 + xyrule) | (chart2 + xyrule) | (chart3 + xyrule)).properties(title = alt.Title("Ancestry results show less correlation with other tests"))
+
+
+```
+
+For this graphic, I really wanted to look at a scatterplot of the different kits' test results to see how well they correlated with each other. This seems like the simplest way to compare them, but it might not be the most accessible for people who don't know what they're looking for. That is why I decided to spend some time working out how to graph an x=y line on each section of the concatenated graphic. Viewers can see how far points are from perfect correlation more easily while it is there.
+
+I tried to use the `.repeat()` method at first, but Altair does not like it when you layer and repeat at the same time so I ended up making this graphic manually and using a horizontal concatenation.
+
+One thing that I had to teach myself for this graphic was how to use `.mark_rule()`. We talked about it existing neat the beginning of the semester, but we never used it in Altair. I relied on the documentation [here](https://altair-viz.github.io/user_guide/marks/rule.html) for guidance.
+
+-   **Comparing Twins**
+
+```{python}
+chart2 = alt.Chart(twins_long).mark_bar(width = 30).encode(
+    alt.X(field = "id", type = "nominal"),
+    alt.Y(field = "genetic share", type = "quantitative", aggregate = 'mean'),
+    alt.Tooltip(field= 'genetic share', type = "quantitative", aggregate = 'mean'),
+    color = 'region:N'
+).properties(
+  width = 80, 
+  height = 300
+) 
+
+onerule = alt.Chart().mark_rule(color='gray').encode(
+  y = alt.datum(1)
+  )
+
+alt.layer(chart2, onerule, data= twins_long).facet(column = 'pair:O').properties(
+  title = alt.Title('Pairs of Twins have Similar Genetic Makeup', subtitle = 'Average results of three ancestry tests show slight yet unexpected differences'))
+
+```
+
+For this chart I don't care about the differences between tests, so I took the average of the genetic share (made easier by the long data format). This allowed me to focus on the differences between twins while not excluding any information.
+
+This graphic follows the ideas of \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_FINISH ABOUT SIMPLE GRAPHICS\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_

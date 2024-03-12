@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Aaron Toth">
+<meta name="dcterms.date" content="2024-03-10">
+
+<title>HW 7 Revision</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="HW_7_Revision_files/libs/clipboard/clipboard.min.js"></script>
+<script src="HW_7_Revision_files/libs/quarto-html/quarto.js"></script>
+<script src="HW_7_Revision_files/libs/quarto-html/popper.min.js"></script>
+<script src="HW_7_Revision_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="HW_7_Revision_files/libs/quarto-html/anchor.min.js"></script>
+<link href="HW_7_Revision_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="HW_7_Revision_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="HW_7_Revision_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="HW_7_Revision_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="HW_7_Revision_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">HW 7 Revision</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Aaron Toth </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 10, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>alt.data_transformers.disable_max_rows()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="73">
+<pre><code>DataTransformerRegistry.enable('default')</code></pre>
+</div>
+</div>
+<p><strong>HW 7 revision</strong>. Complete one of the data and graphics challenges that we didn’t get to in class. This can be a revision and improvement of what you submitted for HW 7, or you can switch challenges.</p>
+<p>Challenge: Create graphics to compare gas prices in $ per gallon. Take advantage of the countries/regions/codes data to do things like use 3-letter codes for countries, group them by region, etc.</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">## reading in the data</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>original_gas_prices <span class="op">=</span> pd.read_csv(<span class="st">"data/pump_price_for_gasoline_us_per_liter.csv"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>country_codes <span class="op">=</span> pd.read_csv(<span class="st">"data/CountryCodes.csv"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">## tidying - DO NOT RERUN THIS LINE</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>gas_prices <span class="op">=</span> original_gas_prices.melt(id_vars <span class="op">=</span> <span class="st">'country'</span>, var_name <span class="op">=</span> <span class="st">'year'</span>, value_name <span class="op">=</span> <span class="st">'price of gas'</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">## rename country codes</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>country_codes.rename(columns <span class="op">=</span> {<span class="st">'name'</span>:<span class="st">'country'</span>}, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">## getting rid of some years/countries with no observations </span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>gas_prices.dropna(subset<span class="op">=</span> <span class="st">'price of gas'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">## Venezuela had some issues  </span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>gas_prices <span class="op">=</span> gas_prices[gas_prices[<span class="st">'country'</span>] <span class="op">!=</span> <span class="st">'Venezuela'</span>]</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">## convert to gallons </span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>gas_prices<span class="op">=</span> gas_prices.astype({<span class="st">'price of gas'</span> : <span class="st">'float'</span>})</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>gas_prices[<span class="st">'price of gas'</span>] <span class="op">=</span> gas_prices[<span class="st">'price of gas'</span>]<span class="op">*</span> <span class="fl">3.78541</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">## making names match </span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>country_codes.replace({</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Bolivia (Plurinational State of)'</span> : <span class="st">'Bolivia'</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Brunei Darussalam'</span> : <span class="st">'Brunei'</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Cabo Verde'</span> : <span class="st">'Cape Verde'</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Congo'</span> : <span class="st">'Congo, Rep.'</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Congo, Democratic Republic of the'</span> : <span class="st">'Congo, Dem. Rep.'</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Côte d'Ivoire"</span> : <span class="st">"Cote d'Ivoire"</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Czechia'</span> : <span class="st">'Czech Republic'</span>,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Iran (Islamic Republic of)'</span> : <span class="st">'Iran'</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Lao People's Democratic Republic"</span> : <span class="st">"Laos"</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Moldova, Republic of'</span> : <span class="st">'Moldova'</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Korea (Democratic People's Republic of)"</span> : <span class="st">"North Korea"</span>,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Palestine, State of'</span> : <span class="st">'Palestine'</span>,</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Russian Federation'</span> : <span class="st">'Russia'</span>,</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Korea, Republic of'</span> : <span class="st">'South Korea'</span>,</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Syrian Arab Republic'</span> : <span class="st">'Syria'</span>,</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Tanzania, United Republic of'</span> : <span class="st">'Tanzania'</span>,</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">'United Kingdom of Great Britain and Northern Ireland'</span> : <span class="st">'United Kingdom'</span>,</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Venezuela (Bolivarian Republic of)'</span> : <span class="st">'Venezuela'</span>,</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Viet Nam'</span> : <span class="st">'Vietnam'</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>}, inplace<span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>gas_prices.replace({</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Hong Kong, China'</span> : <span class="st">'Hong Kong'</span>, </span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Kyrgyz Republic'</span> : <span class="st">'Kyrgyzstan'</span>,</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Lao"</span> : <span class="st">"Laos"</span>,</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  <span class="st">'UAE'</span> : <span class="st">'United Arab Emirates'</span>,</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  <span class="st">'UK'</span> : <span class="st">'United Kingdom'</span>,</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>  <span class="st">'USA'</span> : <span class="st">'United States of America'</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>}, inplace<span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">## had to use pd.merge, not pd.join!</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>gas_data <span class="op">=</span> gas_prices.merge(country_codes, on<span class="op">=</span> <span class="st">'country'</span>, how<span class="op">=</span> <span class="st">'left'</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">## gave up on Kosovo and Slovak Republic </span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>gas_data.dropna(subset<span class="op">=</span> <span class="st">'region'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">## </span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>gas_data_long <span class="op">=</span> gas_data.pivot(columns<span class="op">=</span> <span class="st">'year'</span>, values <span class="op">=</span> <span class="st">'price of gas'</span>, index<span class="op">=</span> <span class="st">'country'</span>).reset_index()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">## a whole new JSON</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> urllib.request <span class="im">import</span> urlopen</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>world2_url <span class="op">=</span> <span class="st">'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>world2 <span class="op">=</span> json.load(urlopen(world2_url))</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">## initializing a slider </span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#slider = alt.binding_range(min=1991, max=2016, step=1)</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>input_dropdown <span class="op">=</span> alt.binding_select(options<span class="op">=</span>[<span class="st">'1991'</span>,<span class="st">'1992'</span>,<span class="st">'1995'</span>,<span class="st">'1998'</span>,<span class="st">'2000'</span>,<span class="st">'2002'</span>,<span class="st">'2004'</span>,<span class="st">'2006'</span>,<span class="st">'2008'</span>,<span class="st">'2010'</span>,<span class="st">'2012'</span>,<span class="st">'2014'</span>,<span class="st">'2016'</span>], name<span class="op">=</span><span class="st">'year '</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>select_year <span class="op">=</span> alt.param(name<span class="op">=</span> <span class="st">'yearr'</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>                        bind<span class="op">=</span> input_dropdown, </span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>                        value<span class="op">=</span> <span class="dv">1991</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">## making the map</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>world <span class="op">=</span> alt.topo_feature(world2_url, feature<span class="op">=</span><span class="st">'countries'</span>)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>map_base <span class="op">=</span> alt.Chart(world).mark_geoshape(stroke<span class="op">=</span><span class="st">'gray'</span>, fill <span class="op">=</span> <span class="st">"#eeeeee"</span>).properties(width <span class="op">=</span> <span class="dv">800</span>, height <span class="op">=</span> <span class="dv">300</span>, title<span class="op">=</span> <span class="st">"Global gas prices fluctuate | 1991-2016"</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>).project(<span class="bu">type</span><span class="op">=</span> <span class="st">'equalEarth'</span>)</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>gasmap <span class="op">=</span> map_base.add_params(select_year</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>).transform_lookup(</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    lookup <span class="op">=</span><span class="st">'properties.name'</span>,</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    from_ <span class="op">=</span> alt.LookupData(</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>      data<span class="op">=</span> gas_data_long, </span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>      key<span class="op">=</span> <span class="st">'country'</span>,</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>      fields<span class="op">=</span> gas_data_long.drop(<span class="st">'country'</span>, axis<span class="op">=</span><span class="dv">1</span>).columns.values</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>).transform_fold(</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>  gas_data_long.drop(<span class="st">'country'</span>, axis<span class="op">=</span><span class="dv">1</span>).columns.values, </span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'year'</span>, <span class="st">'gas_price'</span>]</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>).transform_filter(<span class="st">'yearr == datum.year'</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>).encode(</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>  alt.Fill(field <span class="op">=</span> <span class="st">"gas_price"</span>, <span class="bu">type</span><span class="op">=</span> <span class="st">'quantitative'</span>).scale(</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    domainMax<span class="op">=</span> <span class="dv">10</span>, domainMin<span class="op">=</span> <span class="dv">0</span>, scheme <span class="op">=</span> <span class="st">'viridis'</span></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>  tooltip<span class="op">=</span> [<span class="st">"gas_price:Q"</span>]</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>         </span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>map_base <span class="op">+</span> gasmap</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="co">## set scale domain to be constant </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="78">
+
+<style>
+  #altair-viz-76d944e5dd964a49abd3804484483667.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-76d944e5dd964a49abd3804484483667.vega-embed details,
+  #altair-viz-76d944e5dd964a49abd3804484483667.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-76d944e5dd964a49abd3804484483667"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-76d944e5dd964a49abd3804484483667") {
+      outputDiv = document.getElementById("altair-viz-76d944e5dd964a49abd3804484483667");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.15.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.15.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "layer": [{"mark": {"type": "geoshape", "fill": "#eeeeee", "stroke": "gray"}, "projection": {"type": "equalEarth"}, "title": "Global gas prices fluctuate | 1991-2016"}, {"mark": {"type": "geoshape", "fill": "#eeeeee", "stroke": "gray"}, "encoding": {"fill": {"field": "gas_price", "scale": {"domainMax": 10, "domainMin": 0, "scheme": "viridis"}, "type": "quantitative"}, "tooltip": [{"field": "gas_price", "type": "quantitative"}]}, "projection": {"type": "equalEarth"}, "title": "Global gas prices fluctuate | 1991-2016", "transform": [{"lookup": "properties.name", "from": {"data": {"name": "data-684b73d36113fa579120c57effbe19cb"}, "key": "country", "fields": ["1991", "1992", "1995", "1998", "2000", "2002", "2004", "2006", "2008", "2010", "2012", "2014", "2016"]}}, {"fold": ["1991", "1992", "1995", "1998", "2000", "2002", "2004", "2006", "2008", "2010", "2012", "2014", "2016"], "as": ["year", "gas_price"]}, {"filter": "yearr == datum.year"}]}], "data": {"url": "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json", "format": {"feature": "countries", "type": "topojson"}}, "height": 300, "params": [{"name": "yearr", "bind": {"input": "select", "options": ["1991", "1992", "1995", "1998", "2000", "2002", "2004", "2006", "2008", "2010", "2012", "2014", "2016"], "name": "year "}, "value": 1991}], "width": 800, "$schema": "https://vega.github.io/schema/vega-lite/v5.15.1.json", "datasets": {"data-684b73d36113fa579120c57effbe19cb": [{"country": "Afghanistan", "1991": null, "1992": null, "1995": null, "1998": null, "2000": null, "2002": 1.2870394, "2004": 2.0062673, "2006": 2.5740788, "2008": 3.9746805000000003, "2010": 4.3532215, "2012": 4.8453248, "2014": 4.0503887, "2016": 2.649787}, {"country": "Albania", "1991": null, "1992": null, "1995": null, "1998": 3.2554526, "2000": 2.1576836999999998, "2002": 3.028328, "2004": 4.6560543, "2006": 5.4509904, "2008": 5.1481576, "2010": 5.5266986000000005, "2012": 6.8515921, "2014": 6.6623216, "2016": 5.1481576}, {"country": "Algeria", "1991": 0.5678115, "1992": 0.757082, "1995": 1.514164, "1998": 1.1734771, "2000": 1.0220607000000002, "2002": 0.8327902, "2004": 1.2113312, "2006": 1.2113312, "2008": 1.2870394, "2010": 1.2113312, "2012": 1.0977689, "2014": 1.0220607000000002, "2016": 1.0599148}, {"country": "Andorra", "1991": null, "1992": null, "1995": null, "1998": null, "2000": null, "2002": null, "2004": null, "2006": null, "2008": 4.6939084, "2010": 5.6402609, "2012": 6.3216347, "2014": 5.715969100000001, "2016": null}, {"country": "Angola", "1991": null, "1992": null, "1995": null, "1998": 1.4384558, "2000": 1.135623, "2002": 0.7192279, "2004": 1.4763099000000002, "2006": 1.892705, "2008": 2.0062673, "2010": 2.4605165, "2012": 2.3848083, "2014": 2.8769116, "2016": 3.6718477000000003}, {"country": "Antigua and Barbuda", "1991": null, "1992": null, "1995": null, "1998": null, "2000": 2.1198296, "2002": null, "2004": 2.5740788, "2006": 3.6718477000000003, "2008": 4.2018051000000005, "2010": 3.7475559, "2012": null, "2014": null, "2016": null}, {"country": "Argentina", "1991": null, "1992": 2.9904739000000005, "1995": 2.271246, "1998": 3.5582854, "2000": 4.0503887, "2002": 2.3848083, "2004": 2.3848083, "2006": 2.3469542, "2008": 2.9526198000000003, "2010": 3.6339936, "2012": 5.5266986000000005, "2014": 5.7538232, "2016": 4.163951000000001}, {"country": "Armenia", "1991": null, "1992": null, "1995": null, "1998": 1.8548509, "2000": 2.0819755000000004, "2002": 1.5898722, "2004": 2.5740788, "2006": 3.6339936, "2008": 4.088242800000001, "2010": 4.088242800000001, "2012": 4.7317625, "2014": 4.921033, "2016": 2.9147657000000002}, {"country": "Australia", "1991": null, "1992": null, "1995": null, "1998": 1.7412886, "2000": 2.1576836999999998, "2002": 1.892705, "2004": 3.2175985000000003, "2006": 3.5204313000000003, "2008": 2.8012034, "2010": 4.8074707000000005, "2012": 5.2617199, "2014": 4.6560543, "2016": 3.5204313000000003}, {"country": "Austria", "1991": null, "1992": null, "1995": 4.3532215, "1998": 3.9368264, "2000": 3.1040362, "2002": 3.1797444, "2004": 4.996741200000001, "2006": 4.996741200000001, "2008": 5.186011700000001, "2010": 6.1702183, "2012": 6.8515921, "2014": 6.056656, "2016": 4.542492}, {"country": "Azerbaijan", "1991": null, "1992": null, "1995": null, "1998": 1.7412886, "2000": 1.4763099000000002, "2002": 1.4006017, "2004": 1.5520181, "2006": 1.7412886, "2008": 2.8012034, "2010": 2.8390575, "2012": 2.8769116, "2014": 4.5803461, "2016": 2.1198296}, {"country": "Bahamas", "1991": null, "1992": null, "1995": null, "1998": null, "2000": null, "2002": null, "2004": null, "2006": null, "2008": null, "2010": null, "2012": null, "2014": 3.9746805000000003, "2016": 3.4825772}, {"country": "Bahrain", "1991": null, "1992": null, "1995": null, "1998": 0.9842066, "2000": 1.0220607000000002, "2002": 1.0220607000000002, "2004": 1.0220607000000002, "2006": 0.7949361, "2008": 0.7949361, "2010": 0.7949361, "2012": 1.0220607000000002, "2014": null, "2016": 1.6277263}, {"country": "Bangladesh", "1991": null, "1992": null, "1995": 1.3627476, "1998": 1.7791427, "2000": 1.7412886, "2002": 1.9684132, "2004": 2.2333919, "2006": 2.9904739000000005, "2008": 4.4289297, "2010": 4.1260969, "2012": 4.3532215, "2014": 4.921033, "2016": 4.2396592}, {"country": "Barbados", "1991": null, "1992": null, "1995": null, "1998": 2.7254952, "2000": 3.5961395, "2002": 2.4983706000000003, "2004": 3.1040362, "2006": 4.2018051000000005, "2008": 3.78541, "2010": 4.7317625, "2012": null, "2014": 6.8515921, "2016": null}, {"country": "Belarus", "1991": null, "1992": null, "1995": null, "1998": 1.2870394, "2000": 2.0819755000000004, "2002": 1.892705, "2004": 2.3469542, "2006": 2.9904739000000005, "2008": 5.0345953, "2010": 4.088242800000001, "2012": 3.3311608, "2014": 4.0125346, "2016": 2.271246}, {"country": "Belgium", "1991": null, "1992": null, "1995": 4.4667838, "1998": 4.2396592, "2000": 3.6339936, "2002": 3.9368264, "2004": 5.678115, "2006": 6.1702183, "2008": 5.678115, "2010": 7.078716700000001, "2012": 7.9115069, "2014": 7.192279, "2016": 5.4131363}, {"country": "Belize", "1991": null, "1992": null, "1995": null, "1998": null, "2000": null, "2002": null, "2004": 4.542492, "2006": 4.8074707000000005, "2008": 2.649787, "2010": 4.2775133, "2012": 5.4509904, "2014": 5.186011700000001, "2016": 4.2775133}, {"country": "Benin", "1991": 2.3848083, "1992": 2.3469542, "1995": 1.3627476, "1998": 1.4763099000000002, "2000": 1.8169968, "2002": 2.0441214000000003, "2004": 2.9147657000000002, "2006": 3.0661821000000002, "2008": 3.8989723, "2010": 3.9368264, "2012": 4.6939084, "2014": 3.8989723, "2016": 2.7254952}, {"country": "Bhutan", "1991": null, "1992": null, "1995": null, "1998": 2.2333919, "2000": 2.1955378, "2002": null, "2004": 2.9526198000000003, "2006": null, "2008": 3.4447231000000005, "2010": 4.088242800000001, "2012": 4.5046379, "2014": 3.9368264, "2016": 3.7097018}, {"country": "Bolivia", "1991": null, "1992": 1.6277263, "1995": 1.4384558, "1998": 2.0062673, "2000": 3.028328, "2002": 2.6119329, "2004": 2.0441214000000003, "2006": 2.0441214000000003, "2008": 2.5740788, "2010": 2.649787, "2012": 2.649787, "2014": 2.649787, "2016": 2.6876411}, {"country": "Bosnia and Herzegovina", "1991": null, "1992": null, "1995": null, "1998": 2.4983706000000003, "2000": 2.5740788, "2002": 2.8012034, "2004": 3.6718477000000003, "2006": 5.072449400000001, "2008": 4.2775133, "2010": 5.3752822, "2012": 6.018801900000001, "2014": 5.715969100000001, "2016": 3.9746805000000003}, {"country": "Botswana", "1991": 2.5740788, "1992": 1.5520181, "1995": 1.4384558, "1998": 1.1734771, "2000": 1.5898722, "2002": 1.5520181, "2004": 2.4983706000000003, "2006": 2.9526198000000003, "2008": 3.3311608, "2010": 3.5204313000000003, "2012": 4.6560543, "2014": 4.0125346, "2016": 2.6876411}, {"country": "Brazil", "1991": null, "1992": 2.0062673, "1995": 2.3848083, "1998": 3.028328, "2000": 3.4825772, "2002": 2.0819755000000004, "2004": 3.1797444, "2006": 4.7696166, "2008": 4.7696166, "2010": 5.980947800000001, "2012": 5.2617199, "2014": 4.8074707000000005, "2016": 3.8611182000000004}, {"country": "Brunei", "1991": null, "1992": null, "1995": null, "1998": 1.2870394, "2000": 1.1734771, "2002": 1.135623, "2004": 1.2113312, "2006": 1.2870394, "2008": 1.4384558, "2010": 1.4763099000000002, "2012": 1.6277263, "2014": 1.5520181, "2016": 1.4006017}, {"country": "Bulgaria", "1991": null, "1992": null, "1995": 1.7412886, "1998": 2.4983706000000003, "2000": 2.649787, "2002": 2.5740788, "2004": 3.4825772, "2006": 3.9746805000000003, "2008": 4.8453248, "2010": 5.715969100000001, "2012": 6.3973429, "2014": 5.6402609, "2016": 4.2018051000000005}, {"country": "Burkina Faso", "1991": 3.8989723, "1992": 3.78541, "1995": 3.0661821000000002, "1998": 2.5740788, "2000": 2.5740788, "2002": 3.1418903, "2004": 4.4667838, "2006": 4.3532215, "2008": 5.2238658, "2010": 5.4509904, "2012": 5.4131363, "2014": 5.299574, "2016": 3.7097018}, {"country": "Burundi", "1991": 2.3848083, "1992": 2.2333919, "1995": 1.9684132, "1998": 2.7254952, "2000": 3.8232641000000003, "2002": 2.1955378, "2004": 3.9368264, "2006": 4.542492, "2008": 5.2617199, "2010": 5.4131363, "2012": 5.5645527, "2014": 5.7916773, "2016": 4.5803461}, {"country": "Cambodia", "1991": null, "1992": null, "1995": null, "1998": 1.7791427, "2000": 2.3091001, "2002": 2.3848083, "2004": 2.9904739000000005, "2006": 3.8232641000000003, "2008": 3.5582854, "2010": 4.3532215, "2012": 5.1103035000000006, "2014": 5.072449400000001, "2016": 3.4068690000000004}, {"country": "Cameroon", "1991": 2.5740788, "1992": 2.6119329, "1995": 2.5740788, "1998": 2.4226624, "2000": 2.1198296, "2002": 2.5740788, "2004": 3.5961395, "2006": 4.3153673999999995, "2008": 4.3153673999999995, "2010": 4.542492, "2012": 4.163951000000001, "2014": 4.6939084, "2016": 3.8989723}, {"country": "Canada", "1991": null, "1992": 1.7791427, "1995": 1.7034345000000002, "1998": 1.5520181, "2000": 2.1955378, "2002": 1.9305591000000002, "2004": 2.5740788, "2006": 3.1797444, "2008": 2.8769116, "2010": 4.5803461, "2012": 4.996741200000001, "2014": 4.4289297, "2016": 3.0661821000000002}, {"country": "Cape Verde", "1991": 2.5740788, "1992": null, "1995": null, "1998": 3.0661821000000002, "2000": 2.2333919, "2002": null, "2004": 5.299574, "2006": null, "2008": 6.9651544, "2010": 6.9651544, "2012": 8.706443, "2014": 5.905239600000001, "2016": 3.8611182000000004}, {"country": "Central African Republic", "1991": 5.0345953, "1992": 4.8453248, "1995": 3.1040362, "1998": 3.0661821000000002, "2000": null, "2002": 3.78541, "2004": 4.883178900000001, "2006": 5.186011700000001, "2008": 5.4509904, "2010": 6.4730511, "2012": 6.4730511, "2014": 6.3973429, "2016": 5.3374281}, {"country": "Chad", "1991": 3.9746805000000003, "1992": 3.8611182000000004, "1995": 3.028328, "1998": 2.649787, "2000": 2.5740788, "2002": 2.9904739000000005, "2004": 4.4289297, "2006": 4.9588871, "2008": 4.921033, "2010": 4.996741200000001, "2012": 3.5961395, "2014": 3.4068690000000004, "2016": 2.9526198000000003}, {"country": "Chile", "1991": null, "1992": 1.6277263, "1995": 2.0062673, "1998": 1.8548509, "2000": 2.4226624, "2002": 2.1955378, "2004": 3.2175985000000003, "2006": 4.1260969, "2008": 3.5961395, "2010": 5.2238658, "2012": 5.905239600000001, "2014": 5.7538232, "2016": 3.8989723}, {"country": "China", "1991": null, "1992": null, "1995": 1.0220607000000002, "1998": 1.0599148, "2000": 1.514164, "2002": 1.5898722, "2004": 1.8169968, "2006": 2.6119329, "2008": 3.7475559, "2010": 4.2018051000000005, "2012": 5.186011700000001, "2014": 4.4289297, "2016": 3.6339936}, {"country": "Colombia", "1991": null, "1992": 0.8706443, "1995": 1.3248935, "1998": 0.9084984, "2000": 1.8548509, "2002": 1.6655804, "2004": 2.7254952, "2006": 3.7097018, "2008": 3.9368264, "2010": 5.3374281, "2012": 4.8453248, "2014": 4.088242800000001, "2016": 2.5740788}, {"country": "Congo, Dem. Rep.", "1991": 3.0661821000000002, "1992": 2.8012034, "1995": 2.7633493000000002, "1998": 1.892705, "2000": 3.78541, "2002": 2.649787, "2004": 3.4825772, "2006": 3.5582854, "2008": 4.6560543, "2010": 4.8453248, "2012": 5.6024068, "2014": 6.3594888, "2016": 5.6402609}, {"country": "Congo, Rep.", "1991": 3.9746805000000003, "1992": null, "1995": null, "1998": 2.7254952, "2000": 2.0062673, "2002": 2.6119329, "2004": 3.2933067, "2006": 3.6339936, "2008": 3.0661821000000002, "2010": 4.8074707000000005, "2012": 4.3532215, "2014": 4.2775133, "2016": 3.6718477000000003}, {"country": "Costa Rica", "1991": null, "1992": null, "1995": null, "1998": null, "2000": null, "2002": 2.4226624, "2004": 2.9526198000000003, "2006": 3.7097018, "2008": 4.6939084, "2010": 4.3153673999999995, "2012": 5.9430937, "2014": 5.4509904, "2016": 3.7097018}, {"country": "Cote d'Ivoire", "1991": 4.6939084, "1992": 4.6560543, "1995": 3.1418903, "1998": 2.8012034, "2000": 2.8769116, "2002": 3.2175985000000003, "2004": 4.3153673999999995, "2006": 4.542492, "2008": 5.0345953, "2010": 6.3594888, "2012": 5.715969100000001, "2014": 5.3752822, "2016": 3.5204313000000003}, {"country": "Croatia", "1991": null, "1992": null, "1995": 2.8390575, "1998": 2.5362247000000004, "2000": 2.8769116, "2002": 3.3690149000000003, "2004": 4.6939084, "2006": 5.072449400000001, "2008": 4.8074707000000005, "2010": 6.018801900000001, "2012": 6.7001757, "2014": 6.2837806, "2016": 4.7696166}, {"country": "Cuba", "1991": null, "1992": null, "1995": null, "1998": 1.892705, "2000": null, "2002": 3.4068690000000004, "2004": 3.5961395, "2006": 4.163951000000001, "2008": 6.3216347, "2010": 6.5109052, "2012": 5.299574, "2014": 5.299574, "2016": null}, {"country": "Cyprus", "1991": null, "1992": null, "1995": null, "1998": 2.9526198000000003, "2000": 2.1576836999999998, "2002": 3.1418903, "2004": 4.088242800000001, "2006": 4.7317625, "2008": 4.8453248, "2010": 5.5645527, "2012": 6.7001757, "2014": 6.094510100000001, "2016": 4.6560543}, {"country": "Czech Republic", "1991": null, "1992": null, "1995": 3.2175985000000003, "1998": 2.7254952, "2000": 2.9147657000000002, "2002": 3.0661821000000002, "2004": 4.088242800000001, "2006": 4.921033, "2008": 5.186011700000001, "2010": 6.624467500000001, "2012": 7.3058413, "2014": 6.3216347, "2016": 4.4289297}, {"country": "Denmark", "1991": null, "1992": null, "1995": 4.088242800000001, "1998": 3.9746805000000003, "2000": 3.8232641000000003, "2002": 4.1260969, "2004": 5.715969100000001, "2006": 5.980947800000001, "2008": 5.8295314000000005, "2010": 7.57082, "2012": 7.6465282000000006, "2014": 7.608674099999999, "2016": 5.8673855}, {"country": "Djibouti", "1991": null, "1992": null, "1995": null, "1998": null, "2000": null, "2002": null, "2004": null, "2006": null, "2008": null, "2010": 6.1702183, "2012": 6.624467500000001, "2014": 5.3374281, "2016": 4.996741200000001}, {"country": "Dominican Republic", "1991": null, "1992": null, "1995": 1.514164, "1998": 1.514164, "2000": 2.6876411, "2002": 1.8548509, "2004": 3.2175985000000003, "2006": 3.8989723, "2008": 3.9368264, "2010": 4.6560543, "2012": 5.980947800000001, "2014": 5.3374281, "2016": 4.0503887}, {"country": "Ecuador", "1991": null, "1992": 1.1734771, "1995": 1.2491853000000002, "1998": 1.4384558, "2000": 1.1734771, "2002": 2.0819755000000004, "2004": 2.0441214000000003, "2006": 1.7791427, "2008": 1.9305591000000002, "2010": 2.0062673, "2012": 2.1955378, "2014": 2.271246, "2016": 2.3091001}, {"country": "Egypt", "1991": 1.0977689, "1992": 1.135623, "1995": 1.0977689, "1998": 1.0977689, "2000": 0.9842066, "2002": 0.7192279, "2004": 1.0599148, "2006": 1.135623, "2008": 1.8548509, "2010": 1.8169968, "2012": 1.7034345000000002, "2014": 3.3311608, "2016": 1.514164}, {"country": "El Salvador", "1991": null, "1992": null, "1995": null, "1998": 2.0441214000000003, "2000": 2.5362247000000004, "2002": 1.7412886, "2004": 2.4605165, "2006": 3.1040362, "2008": 2.9526198000000003, "2010": 3.4825772, "2012": 4.7696166, "2014": 4.2396592, "2016": 3.1418903}, {"country": "Eritrea", "1991": null, "1992": 1.892705, "1995": 1.514164, "1998": 1.4006017, "2000": 2.1198296, "2002": 1.3627476, "2004": 3.028328, "2006": 7.192279, "2008": 9.5770873, "2010": 9.614941400000001, "2012": 9.425670900000002, "2014": 12.6054153, "2016": 7.57082}, {"country": "Estonia", "1991": null, "1992": null, "1995": 1.2491853000000002, "1998": 1.7034345000000002, "2000": 2.271246, "2002": 2.1955378, "2004": 3.5582854, "2006": 4.6560543, "2008": 4.4667838, "2010": 5.8295314000000005, "2012": 6.6623216, "2014": 5.5266986000000005, "2016": 4.3153673999999995}, {"country": "Eswatini", "1991": 1.7412886, "1992": 1.6277263, "1995": null, "1998": 1.4006017, "2000": 1.7791427, "2002": null, "2004": 2.8769116, "2006": 3.028328, "2008": 3.2554526, "2010": 4.0503887, "2012": 4.921033, "2014": 4.3153673999999995, "2016": 2.9147657000000002}, {"country": "Ethiopia", "1991": 1.0220607000000002, "1992": 0.9842066, "1995": 1.2113312, "1998": 1.3627476, "2000": 1.7412886, "2002": 1.9684132, "2004": 2.271246, "2006": 3.5204313000000003, "2008": 3.4825772, "2010": 3.4447231000000005, "2012": 3.9746805000000003, "2014": 3.7475559, "2016": 2.8390575}, {"country": "Fiji", "1991": null, "1992": null, "1995": null, "1998": 1.892705, "2000": null, "2002": null, "2004": 3.4447231000000005, "2006": 4.0503887, "2008": 4.3532215, "2010": null, "2012": 5.3374281, "2014": 5.072449400000001, "2016": 3.1040362}, {"country": "Finland", "1991": null, "1992": null, "1995": 4.542492, "1998": 4.4289297, "2000": 4.0125346, "2002": 4.2396592, "2004": 5.8295314000000005, "2006": 5.8673855, "2008": 5.9430937, "2010": 7.3436954000000005, "2012": 7.8736528, "2014": 7.1544248999999995, "2016": 5.4888445}, {"country": "France", "1991": null, "1992": null, "1995": 4.4289297, "1998": 4.2018051000000005, "2000": 3.7475559, "2002": 3.9746805000000003, "2004": 5.3752822, "2006": 5.6024068, "2008": 5.7538232, "2010": 7.4951118, "2012": 7.2301331, "2014": 6.7758839, "2016": 5.2617199}, {"country": "French Polynesia", "1991": null, "1992": null, "1995": null, "1998": null, "2000": null, "2002": null, "2004": null, "2006": 5.6402609, "2008": 5.980947800000001, "2010": 6.4351970000000005, "2012": null, "2014": null, "2016": null}, {"country": "Gabon", "1991": 4.4667838, "1992": 4.3910756, "1995": null, "1998": 2.3848083, "2000": 2.0062673, "2002": 2.6119329, "2004": 3.4068690000000004, "2006": 2.4226624, "2008": 4.3153673999999995, "2010": null, "2012": 3.9368264, "2014": 3.8611182000000004, "2016": 3.4825772}, {"country": "Gambia", "1991": 2.7633493000000002, "1992": 2.5362247000000004, "1995": null, "1998": 3.1418903, "2000": 2.4226624, "2002": 1.7412886, "2004": 2.8390575, "2006": 4.088242800000001, "2008": 2.9904739000000005, "2010": null, "2012": null, "2014": 5.186011700000001, "2016": 4.4667838}, {"country": "Georgia", "1991": null, "1992": null, "1995": null, "1998": 1.7412886, "2000": null, "2002": 1.8169968, "2004": 2.7633493000000002, "2006": 3.2554526, "2008": 4.1260969, "2010": 4.2775133, "2012": 5.072449400000001, "2014": 4.6939084, "2016": 2.8769116}, {"country": "Germany", "1991": null, "1992": null, "1995": 4.2396592, "1998": 3.6339936, "2000": 3.4447231000000005, "2002": 3.8989723, "2004": 5.5266986000000005, "2006": 5.8673855, "2008": 5.905239600000001, "2010": 7.192279, "2012": 7.4194036, "2014": 6.813738000000001, "2016": 5.2617199}, {"country": "Ghana", "1991": 2.0062673, "1992": 2.0062673, "1995": 1.4384558, "1998": 1.2113312, "2000": 0.757082, "2002": 1.0599148, "2004": 1.8548509, "2006": 3.2554526, "2008": 3.4068690000000004, "2010": 3.1040362, "2012": 3.4825772, "2014": 4.0125346, "2016": 3.4825772}, {"country": "Greece", "1991": null, "1992": null, "1995": 3.3311608, "1998": 2.4605165, "2000": 2.7254952, "2002": 2.9526198000000003, "2004": 4.3153673999999995, "2006": 4.3910756, "2008": 4.6560543, "2010": 7.7600905, "2012": 7.7979446, "2014": 7.4951118, "2016": 5.8295314000000005}, {"country": "Grenada", "1991": null, "1992": null, "1995": null, "1998": 2.0441214000000003, "2000": 2.0441214000000003, "2002": 2.0441214000000003, "2004": 2.7633493000000002, "2006": 3.3690149000000003, "2008": 4.8453248, "2010": 3.8611182000000004, "2012": 5.299574, "2014": null, "2016": 4.2396592}, {"country": "Guatemala", "1991": null, "1992": 1.2113312, "1995": 1.4763099000000002, "1998": 1.5520181, "2000": 2.0062673, "2002": 1.8169968, "2004": 2.5740788, "2006": 2.9526198000000003, "2008": 3.2554526, "2010": 3.5961395, "2012": 4.3153673999999995, "2014": 3.8232641000000003, "2016": 2.9904739000000005}, {"country": "Guinea", "1991": 2.5362247000000004, "1992": 2.3091001, "1995": null, "1998": 2.5740788, "2000": 3.2175985000000003, "2002": 2.4983706000000003, "2004": 2.8390575, "2006": 2.9904739000000005, "2008": 3.8611182000000004, "2010": 3.5961395, "2012": 5.072449400000001, "2014": 5.4888445, "2016": 3.4068690000000004}, {"country": "Guyana", "1991": null, "1992": null, "1995": null, "1998": 1.135623, "2000": 1.4006017, "2002": 1.1734771, "2004": 2.8012034, "2006": null, "2008": 3.1797444, "2010": 3.5204313000000003, "2012": 4.088242800000001, "2014": 4.3532215, "2016": 3.4068690000000004}, {"country": "Haiti", "1991": null, "1992": null, "1995": null, "1998": 2.2333919, "2000": 2.4226624, "2002": 2.0441214000000003, "2004": 3.3311608, "2006": null, "2008": 4.3910756, "2010": null, "2012": 4.7317625, "2014": 4.3910756, "2016": 3.0661821000000002}, {"country": "Honduras", "1991": null, "1992": 1.5520181, "1995": 1.3248935, "1998": 1.892705, "2000": 2.3469542, "2002": 2.3848083, "2004": 3.0661821000000002, "2006": 3.3690149000000003, "2008": 3.028328, "2010": 3.9368264, "2012": 4.7317625, "2014": 4.542492, "2016": 3.7097018}, {"country": "Hong Kong", "1991": 3.1040362, "1992": null, "1995": 4.5046379, "1998": 5.1481576, "2000": 5.5266986000000005, "2002": 5.5645527, "2004": 5.8295314000000005, "2006": 6.3973429, "2008": 7.3815495, "2010": 7.2679872, "2012": 8.176485600000001, "2014": 7.7979446, "2016": 7.0408626000000005}, {"country": "Hungary", "1991": null, "1992": null, "1995": 2.8012034, "1998": 2.7254952, "2000": 3.0661821000000002, "2002": 3.5582854, "2004": 4.921033, "2006": 4.921033, "2008": 4.8074707000000005, "2010": 6.3216347, "2012": 6.9651544, "2014": 5.980947800000001, "2016": 4.4667838}, {"country": "Iceland", "1991": null, "1992": null, "1995": null, "1998": 4.2396592, "2000": 3.9746805000000003, "2002": 4.3910756, "2004": 6.2080724, "2006": 7.0408626000000005, "2008": 4.3532215, "2010": 6.4730511, "2012": 7.532965900000001, "2014": 7.003008500000001, "2016": 6.3973429}, {"country": "India", "1991": 2.1198296, "1992": null, "1995": 1.8169968, "1998": 2.1198296, "2000": 2.271246, "2002": 2.4983706000000003, "2004": 3.2933067, "2006": 3.8232641000000003, "2008": 4.1260969, "2010": 4.3532215, "2012": 4.7317625, "2014": 4.163951000000001, "2016": 3.6718477000000003}, {"country": "Indonesia", "1991": 0.9084984, "1992": null, "1995": 1.6655804, "1998": 0.6056656, "2000": 0.6435197, "2002": 1.0220607000000002, "2004": 1.0220607000000002, "2006": 2.1576836999999998, "2008": 1.892705, "2010": 2.9904739000000005, "2012": 1.7791427, "2014": 3.5204313000000003, "2016": 2.3848083}, {"country": "Iran", "1991": null, "1992": null, "1995": null, "1998": 0.3028328, "2000": 0.1892705, "2002": 0.2649787, "2004": 0.3406869, "2006": 0.3406869, "2008": 0.378541, "2010": 0.36718477000000005, "2012": 1.2491853000000002, "2014": 1.4157433400000001, "2016": 1.5103785900000002}, {"country": "Iraq", "1991": null, "1992": null, "1995": null, "1998": null, "2000": null, "2002": null, "2004": null, "2006": null, "2008": null, "2010": 2.9526198000000003, "2012": null, "2014": 1.6277263, "2016": 2.3091001}, {"country": "Ireland", "1991": null, "1992": null, "1995": 3.6339936, "1998": 3.8611182000000004, "2000": 2.7254952, "2002": 3.4068690000000004, "2004": 4.883178900000001, "2006": 5.072449400000001, "2008": 5.905239600000001, "2010": 6.7380298000000005, "2012": 7.6465282000000006, "2014": 7.2679872, "2016": 5.186011700000001}, {"country": "Israel", "1991": null, "1992": null, "1995": 2.7633493000000002, "1998": 3.2554526, "2000": 4.3153673999999995, "2002": 3.4068690000000004, "2004": 3.9746805000000003, "2006": 5.5645527, "2008": 5.186011700000001, "2010": 7.003008500000001, "2012": 7.608674099999999, "2014": 7.1165708, "2016": 5.9430937}, {"country": "Italy", "1991": null, "1992": null, "1995": 4.4667838, "1998": 4.5046379, "2000": 3.6718477000000003, "2002": 3.9746805000000003, "2004": 5.7916773, "2006": 5.905239600000001, "2008": 5.9430937, "2010": 7.078716700000001, "2012": 8.630734799999999, "2014": 8.1007774, "2016": 6.094510100000001}, {"country": "Jamaica", "1991": null, "1992": null, "1995": null, "1998": 1.4006017, "2000": 2.3469542, "2002": 1.9684132, "2004": 2.3848083, "2006": 3.1040362, "2008": 2.8012034, "2010": 3.7097018, "2012": 4.542492, "2014": 4.3153673999999995, "2016": 4.2018051000000005}, {"country": "Japan", "1991": null, "1992": null, "1995": 4.7317625, "1998": 3.8611182000000004, "2000": 4.0125346, "2002": 3.4447231000000005, "2004": 4.7696166, "2006": 4.1260969, "2008": 5.3752822, "2010": 6.056656, "2012": 7.57082, "2014": 5.2238658, "2016": 4.0125346}, {"country": "Jordan", "1991": null, "1992": null, "1995": 1.514164, "1998": 1.5898722, "2000": 1.7034345000000002, "2002": 1.9684132, "2004": 2.3091001, "2006": 3.2554526, "2008": 2.3091001, "2010": 3.9368264, "2012": 5.4509904, "2014": 4.8074707000000005, "2016": 4.163951000000001}, {"country": "Kazakhstan", "1991": null, "1992": null, "1995": 1.135623, "1998": 1.135623, "2000": 1.3627476, "2002": 1.3248935, "2004": 1.9684132, "2006": 2.649787, "2008": 3.1418903, "2010": 2.6876411, "2012": 3.8232641000000003, "2014": 3.0661821000000002, "2016": 1.5898722}, {"country": "Kenya", "1991": 2.0062673, "1992": 1.514164, "1995": 2.1198296, "1998": 2.649787, "2000": 2.6876411, "2002": 2.649787, "2004": 3.4825772, "2006": 4.2396592, "2008": 4.542492, "2010": 5.0345953, "2012": 5.186011700000001, "2014": 4.5803461, "2016": 3.5961395}, {"country": "Kuwait", "1991": null, "1992": null, "1995": null, "1998": 0.6435197, "2000": 0.7949361, "2002": 0.757082, "2004": 0.9084984, "2006": 0.8327902, "2008": 0.9084984, "2010": 0.8706443, "2012": 0.8706443, "2014": 0.8327902, "2016": 1.3248935}, {"country": "Kyrgyzstan", "1991": null, "1992": null, "1995": null, "1998": 1.7791427, "2000": 1.6655804, "2002": 1.4763099000000002, "2004": 1.8169968, "2006": 2.4226624, "2008": 3.028328, "2010": 3.2175985000000003, "2012": 3.3690149000000003, "2014": 3.5582854, "2016": 2.1198296}, {"country": "Laos", "1991": null, "1992": null, "1995": null, "1998": 1.1734771, "2000": 1.5520181, "2002": 1.3627476, "2004": 2.0441214000000003, "2006": 3.2554526, "2008": 3.4825772, "2010": 4.7696166, "2012": 5.0345953, "2014": 5.299574, "2016": 3.5204313000000003}, {"country": "Latvia", "1991": null, "1992": null, "1995": 1.5520181, "1998": 2.0819755000000004, "2000": 2.5362247000000004, "2002": 2.649787, "2004": 3.5582854, "2006": 4.542492, "2008": 4.2396592, "2010": 5.6024068, "2012": 6.813738000000001, "2014": 5.6024068, "2016": 4.3910756}, {"country": "Lebanon", "1991": null, "1992": null, "1995": null, "1998": 1.3248935, "2000": 2.0062673, "2002": 2.4605165, "2004": 2.6876411, "2006": 2.8012034, "2008": 2.8769116, "2010": 4.2775133, "2012": 4.2018051000000005, "2014": 3.6339936, "2016": 2.8012034}, {"country": "Lesotho", "1991": null, "1992": null, "1995": null, "1998": 1.4763099000000002, "2000": 1.892705, "2002": null, "2004": 2.7633493000000002, "2006": 3.3690149000000003, "2008": 2.9904739000000005, "2010": 3.6718477000000003, "2012": 4.6939084, "2014": 3.8989723, "2016": 2.649787}, {"country": "Liberia", "1991": null, "1992": null, "1995": null, "1998": null, "2000": null, "2002": null, "2004": 2.8390575, "2006": 2.9904739000000005, "2008": 2.9147657000000002, "2010": 3.7097018, "2012": 4.4289297, "2014": 3.4447231000000005, "2016": 3.028328}, {"country": "Libya", "1991": null, "1992": null, "1995": null, "1998": 0.8327902, "2000": 0.9463525, "2002": 0.378541, "2004": 0.3406869, "2006": 0.4542492, "2008": 0.5299574, "2010": 0.6435197, "2012": 0.4542492, "2014": null, "2016": 0.4163951}, {"country": "Liechtenstein", "1991": null, "1992": null, "1995": null, "1998": 3.2175985000000003, "2000": 3.0661821000000002, "2002": 3.3690149000000003, "2004": 4.883178900000001, "2006": 4.8074707000000005, "2008": 4.921033, "2010": 6.2837806, "2012": 7.1165708, "2014": 6.5866134, "2016": null}, {"country": "Lithuania", "1991": null, "1992": null, "1995": 1.3248935, "1998": 1.9305591000000002, "2000": 2.4983706000000003, "2002": 2.6119329, "2004": 3.8989723, "2006": 4.088242800000001, "2008": 4.2775133, "2010": 6.018801900000001, "2012": 6.927300300000001, "2014": 5.9430937, "2016": 4.3910756}, {"country": "Luxembourg", "1991": null, "1992": null, "1995": 3.1797444, "1998": 2.9526198000000003, "2000": 2.8390575, "2002": 2.8769116, "2004": 4.5046379, "2006": 4.883178900000001, "2008": 5.299574, "2010": 5.8673855, "2012": 6.2080724, "2014": 5.7538232, "2016": 4.5046379}, {"country": "Madagascar", "1991": 1.6277263, "1992": 2.0441214000000003, "1995": 1.7791427, "1998": 1.7791427, "2000": 2.8769116, "2002": 4.088242800000001, "2004": 3.9746805000000003, "2006": 4.3532215, "2008": 5.8673855, "2010": 5.7538232, "2012": 5.6402609, "2014": 5.1103035000000006, "2016": 4.2018051000000005}, {"country": "Malawi", "1991": 2.4226624, "1992": 2.6876411, "1995": 2.4605165, "1998": 1.9305591000000002, "2000": 2.6119329, "2002": 2.4983706000000003, "2004": 3.5961395, "2006": 4.4289297, "2008": 6.7380298000000005, "2010": 6.4730511, "2012": 7.3058413, "2014": 6.7380298000000005, "2016": 4.3532215}, {"country": "Malaysia", "1991": 1.514164, "1992": null, "1995": 1.5898722, "1998": 1.0599148, "2000": 1.0599148, "2002": 1.3248935, "2004": 1.4006017, "2006": 2.0062673, "2008": 2.0062673, "2010": 2.2333919, "2012": 2.3469542, "2014": 2.5740788, "2016": 1.7034345000000002}, {"country": "Maldives", "1991": null, "1992": null, "1995": null, "1998": null, "2000": null, "2002": null, "2004": null, "2006": null, "2008": null, "2010": 3.1797444, "2012": 4.163951000000001, "2014": 6.1702183, "2016": null}, {"country": "Mali", "1991": 4.2396592, "1992": 4.3153673999999995, "1995": 3.1040362, "1998": 2.9147657000000002, "2000": 2.649787, "2002": 2.6119329, "2004": 4.3910756, "2006": 4.6182002, "2008": 4.921033, "2010": 5.3752822, "2012": 5.3374281, "2014": 5.5645527, "2016": 4.2396592}, {"country": "Malta", "1991": null, "1992": null, "1995": null, "1998": 2.9147657000000002, "2000": 3.0661821000000002, "2002": 3.2933067, "2004": 4.4667838, "2006": 5.2238658, "2008": 6.2837806, "2010": 6.1702183, "2012": 7.2679872, "2014": 6.813738000000001, "2016": 5.1481576}, {"country": "Marshall Islands", "1991": null, "1992": null, "1995": null, "1998": null, "2000": null, "2002": null, "2004": null, "2006": null, "2008": null, "2010": null, "2012": null, "2014": 5.4509904, "2016": null}, {"country": "Mauritania", "1991": 3.2554526, "1992": 3.2175985000000003, "1995": null, "1998": 2.2333919, "2000": 2.5362247000000004, "2002": 2.3848083, "2004": 3.028328, "2006": 3.6718477000000003, "2008": 5.6402609, "2010": 4.3910756, "2012": 5.4131363, "2014": 5.7916773, "2016": 4.2775133}, {"country": "Mauritius", "1991": null, "1992": null, "1995": null, "1998": null, "2000": null, "2002": null, "2004": null, "2006": null, "2008": null, "2010": 5.8673855, "2012": 6.2459264999999995, "2014": 6.2459264999999995, "2016": 4.2396592}, {"country": "Mexico", "1991": null, "1992": 1.4763099000000002, "1995": 1.2113312, "1998": 1.3627476, "2000": 2.3091001, "2002": 2.3469542, "2004": 2.2333919, "2006": 2.8012034, "2008": 2.8012034, "2010": 3.0661821000000002, "2012": 3.2554526, "2014": 3.8989723, "2016": 2.7633493000000002}, {"country": "Moldova", "1991": null, "1992": null, "1995": null, "1998": null, "2000": null, "2002": null, "2004": null, "2006": null, "2008": 4.542492, "2010": 4.5803461, "2012": 5.3752822, "2014": 4.5803461, "2016": 3.028328}, {"country": "Monaco", "1991": null, "1992": null, "1995": null, "1998": null, "2000": null, "2002": null, "2004": null, "2006": null, "2008": 6.2080724, "2010": 7.2679872, "2012": 8.4414643, "2014": 7.57082, "2016": null}, {"country": "Mongolia", "1991": null, "1992": null, "1995": null, "1998": 0.8706443, "2000": 1.4384558, "2002": 1.4384558, "2004": 2.3091001, "2006": 3.3311608, "2008": 5.2238658, "2010": 4.2018051000000005, "2012": 4.883178900000001, "2014": 3.8232641000000003, "2016": 2.7254952}, {"country": "Montenegro", "1991": null, "1992": null, "1995": 2.8769116, "1998": 2.3091001, "2000": 2.1198296, "2002": 2.8012034, "2004": 4.542492, "2006": 5.715969100000001, "2008": 4.8074707000000005, "2010": 6.1323642000000005, "2012": 6.889446200000001, "2014": 6.056656, "2016": 4.3910756}, {"country": "Morocco", "1991": 3.1040362, "1992": 2.8390575, "1995": 3.5582854, "1998": 2.9904739000000005, "2000": 3.1040362, "2002": 3.2933067, "2004": 4.163951000000001, "2006": 4.6182002, "2008": 4.883178900000001, "2010": 4.6560543, "2012": 5.3752822, "2014": 5.2238658, "2016": 3.7475559}, {"country": "Mozambique", "1991": 2.8012034, "1992": 1.8169968, "1995": 2.0062673, "1998": 2.0819755000000004, "2000": 2.1198296, "2002": 1.7412886, "2004": 3.3311608, "2006": 4.3532215, "2008": 6.4730511, "2010": 4.2018051000000005, "2012": 5.980947800000001, "2014": 5.8673855, "2016": 2.4605165}, {"country": "Myanmar", "1991": null, "1992": null, "1995": null, "1998": 0.4921033, "2000": 1.2491853000000002, "2002": 1.3627476, "2004": 0.4542492, "2006": 2.4983706000000003, "2008": 1.6277263, "2010": 3.028328, "2012": 3.9368264, "2014": 4.3153673999999995, "2016": 2.0441214000000003}, {"country": "Namibia", "1991": 1.7412886, "1992": 1.5898722, "1995": null, "1998": 1.4384558, "2000": 1.7791427, "2002": 1.7034345000000002, "2004": 2.5740788, "2006": 3.2933067, "2008": 2.9526198000000003, "2010": 4.0125346, "2012": 4.6939084, "2014": 4.088242800000001, "2016": 2.8769116}, {"country": "Nauru", "1991": null, "1992": null, "1995": null, "1998": null, "2000": null, "2002": null, "2004": null, "2006": null, "2008": null, "2010": 6.056656, "2012": null, "2014": null, "2016": null}, {"country": "Nepal", "1991": 2.4605165, "1992": null, "1995": 1.9684132, "1998": 2.2333919, "2000": 2.3848083, "2002": 2.4983706000000003, "2004": 2.7254952, "2006": 3.5582854, "2008": 4.2775133, "2010": 4.4667838, "2012": 5.4509904, "2014": 4.9588871, "2016": 3.4447231000000005}, {"country": "Netherlands", "1991": null, "1992": null, "1995": 4.5803461, "1998": 4.3153673999999995, "2000": 3.8989723, "2002": 4.2396592, "2004": 6.1323642000000005, "2006": 6.4351970000000005, "2008": 6.3594888, "2010": 8.0629233, "2012": 8.8200053, "2014": 8.1386315, "2016": 6.3594888}, {"country": "New Zealand", "1991": null, "1992": null, "1995": 2.3091001, "1998": 2.4226624, "2000": 1.8169968, "2002": 2.0819755000000004, "2004": 2.9147657000000002, "2006": 3.7097018, "2008": 4.1260969, "2010": 5.5645527, "2012": 6.7001757, "2014": 6.4730511, "2016": 5.299574}, {"country": "Nicaragua", "1991": null, "1992": 2.6119329, "1995": 2.3469542, "1998": 1.7791427, "2000": 2.3469542, "2002": 2.0441214000000003, "2004": 2.6119329, "2006": 2.5362247000000004, "2008": 3.2933067, "2010": 4.1260969, "2012": 4.6560543, "2014": 4.4667838, "2016": 3.4447231000000005}, {"country": "Niger", "1991": 3.5582854, "1992": 3.4825772, "1995": 2.9904739000000005, "1998": 2.8769116, "2000": 2.5740788, "2002": 2.9147657000000002, "2004": 3.8611182000000004, "2006": 4.3153673999999995, "2008": 3.7475559, "2010": 4.0503887, "2012": 4.2396592, "2014": 4.1260969, "2016": 3.3311608}, {"country": "Nigeria", "1991": 0.1892705, "1992": 0.0757082, "1995": 0.4921033, "1998": 0.4921033, "2000": 1.0220607000000002, "2002": 0.757082, "2004": 1.4763099000000002, "2006": 1.9305591000000002, "2008": 2.2333919, "2010": 1.6655804, "2012": 2.3469542, "2014": 2.1198296, "2016": 1.7412886}, {"country": "North Korea", "1991": null, "1992": null, "1995": null, "1998": 2.7633493000000002, "2000": 2.0819755000000004, "2002": 2.0819755000000004, "2004": 2.9526198000000003, "2006": 2.6876411, "2008": 2.8769116, "2010": null, "2012": null, "2014": 3.5582854, "2016": 2.1955378}, {"country": "North Macedonia", "1991": null, "1992": null, "1995": 3.5204313000000003, "1998": 2.649787, "2000": 2.8769116, "2002": 3.2175985000000003, "2004": 4.4289297, "2006": 4.6560543, "2008": 4.3532215, "2010": 5.7538232, "2012": 6.624467500000001, "2014": 5.6402609, "2016": 4.2018051000000005}, {"country": "Norway", "1991": null, "1992": null, "1995": 5.0345953, "1998": 4.5803461, "2000": 4.5046379, "2002": 4.6560543, "2004": 6.094510100000001, "2006": 6.813738000000001, "2008": 6.1702183, "2010": 8.0250692, "2012": 9.5770873, "2014": 8.5928807, "2016": 6.7380298000000005}, {"country": "Oman", "1991": null, "1992": null, "1995": null, "1998": 1.1734771, "2000": 1.1734771, "2002": 1.1734771, "2004": 1.1734771, "2006": 1.1734771, "2008": 1.1734771, "2010": 1.1734771, "2012": 1.1734771, "2014": 1.1734771, "2016": 1.7034345000000002}, {"country": "Pakistan", "1991": null, "1992": null, "1995": 1.7791427, "1998": 1.7412886, "2000": 2.0062673, "2002": 1.9684132, "2004": 2.3469542, "2006": 3.8232641000000003, "2008": 3.1797444, "2010": 3.2554526, "2012": 4.3153673999999995, "2014": 3.5582854, "2016": 2.9904739000000005}, {"country": "Palestine", "1991": null, "1992": null, "1995": null, "1998": 3.2554526, "2000": 4.088242800000001, "2002": 3.7475559, "2004": 4.4289297, "2006": 4.883178900000001, "2008": 5.072449400000001, "2010": 6.4730511, "2012": 7.078716700000001, "2014": 6.7001757, "2016": 5.8295314000000005}, {"country": "Panama", "1991": null, "1992": 1.6277263, "1995": null, "1998": 1.5520181, "2000": 2.0062673, "2002": 1.9305591000000002, "2004": 2.0441214000000003, "2006": 2.649787, "2008": 2.5362247000000004, "2010": 3.2175985000000003, "2012": 3.9746805000000003, "2014": 3.6339936, "2016": 2.8012034}, {"country": "Papua New Guinea", "1991": null, "1992": null, "1995": null, "1998": 1.5520181, "2000": 2.0062673, "2002": null, "2004": 3.5582854, "2006": null, "2008": 3.5582854, "2010": null, "2012": null, "2014": 5.1481576, "2016": null}, {"country": "Paraguay", "1991": null, "1992": 1.6277263, "1995": 1.6655804, "1998": 1.7791427, "2000": 2.7254952, "2002": 2.1198296, "2004": 2.3469542, "2006": 3.6718477000000003, "2008": 4.4289297, "2010": 4.8453248, "2012": 6.5866134, "2014": 6.018801900000001, "2016": 3.9368264}, {"country": "Peru", "1991": null, "1992": 2.1198296, "1995": 2.5740788, "1998": 2.0819755000000004, "2000": 3.028328, "2002": 2.8012034, "2004": 4.2396592, "2006": 4.6182002, "2008": 5.3752822, "2010": 5.3374281, "2012": 6.1702183, "2014": 5.5266986000000005, "2016": 3.7475559}, {"country": "Philippines", "1991": 1.514164, "1992": null, "1995": 1.2870394, "1998": 1.2870394, "2000": 1.4006017, "2002": 1.3248935, "2004": 1.9684132, "2006": 2.8769116, "2008": 3.4447231000000005, "2010": 3.9746805000000003, "2012": 4.7317625, "2014": 3.9746805000000003, "2016": 3.2554526}, {"country": "Poland", "1991": null, "1992": null, "1995": 2.0819755000000004, "1998": 2.0441214000000003, "2000": 2.8769116, "2002": 3.1418903, "2004": 4.542492, "2006": 4.921033, "2008": 5.4131363, "2010": 5.9430937, "2012": 6.5866134, "2014": 5.3752822, "2016": 4.0503887}, {"country": "Portugal", "1991": null, "1992": null, "1995": null, "1998": 3.8611182000000004, "2000": 2.9147657000000002, "2002": 3.6718477000000003, "2004": 5.2238658, "2006": 5.905239600000001, "2008": 6.094510100000001, "2010": 7.003008500000001, "2012": 8.1386315, "2014": 7.1544248999999995, "2016": 5.8295314000000005}, {"country": "Qatar", "1991": null, "1992": null, "1995": null, "1998": 0.6056656, "2000": null, "2002": null, "2004": 0.7949361, "2006": 0.7192279, "2008": 0.8327902, "2010": 0.7192279, "2012": 1.0220607000000002, "2014": 0.8706443, "2016": 1.514164}, {"country": "Romania", "1991": null, "1992": null, "1995": 1.0977689, "1998": 2.0062673, "2000": 1.7412886, "2002": 2.4226624, "2004": 3.6339936, "2006": 4.7696166, "2008": 4.2018051000000005, "2010": 5.5266986000000005, "2012": 6.4351970000000005, "2014": 6.018801900000001, "2016": 4.3910756}, {"country": "Russia", "1991": null, "1992": null, "1995": 1.3248935, "1998": 1.0599148, "2000": 1.2491853000000002, "2002": 1.3248935, "2004": 2.0819755000000004, "2006": 2.9147657000000002, "2008": 3.3690149000000003, "2010": 3.1797444, "2012": 3.7475559, "2014": 3.0661821000000002, "2016": 2.2333919}, {"country": "Rwanda", "1991": 3.0661821000000002, "1992": 3.5204313000000003, "1995": null, "1998": 2.7254952, "2000": 3.3690149000000003, "2002": 3.1797444, "2004": 3.7097018, "2006": 4.2018051000000005, "2008": 5.186011700000001, "2010": 6.1702183, "2012": 6.5487593, "2014": 5.3374281, "2016": 4.4289297}, {"country": "Samoa", "1991": null, "1992": null, "1995": null, "1998": null, "2000": null, "2002": null, "2004": null, "2006": null, "2008": null, "2010": 3.8989723, "2012": null, "2014": null, "2016": 3.4447231000000005}, {"country": "Saudi Arabia", "1991": null, "1992": null, "1995": 0.6056656, "1998": 0.6056656, "2000": 0.9084984, "2002": 0.9084984, "2004": 0.9084984, "2006": 0.6056656, "2008": 0.6056656, "2010": 0.6056656, "2012": 0.6056656, "2014": 0.6056656, "2016": 0.9084984}, {"country": "Senegal", "1991": 4.5046379, "1992": 4.6560543, "1995": 3.5582854, "1998": 2.6876411, "2000": 2.7633493000000002, "2002": 2.8390575, "2004": 4.163951000000001, "2006": 4.9588871, "2008": 5.1103035000000006, "2010": 5.9430937, "2012": 6.5109052, "2014": 6.4351970000000005, "2016": 4.3153673999999995}, {"country": "Serbia", "1991": null, "1992": null, "1995": 2.8769116, "1998": 2.3091001, "2000": 2.1198296, "2002": 2.8012034, "2004": 3.78541, "2006": 5.4888445, "2008": 4.883178900000001, "2010": 5.678115, "2012": 6.7380298000000005, "2014": 5.8673855, "2016": 4.3910756}, {"country": "Sierra Leone", "1991": 1.7034345000000002, "1992": 1.8548509, "1995": null, "1998": 2.3091001, "2000": null, "2002": 1.9305591000000002, "2004": 2.8769116, "2006": 3.7097018, "2008": 3.4447231000000005, "2010": 3.5582854, "2012": 3.9746805000000003, "2014": 3.9368264, "2016": 4.088242800000001}, {"country": "Singapore", "1991": 2.3091001, "1992": null, "1995": 3.2175985000000003, "1998": 2.7254952, "2000": 3.1797444, "2002": 3.2175985000000003, "2004": 3.3690149000000003, "2006": 3.4825772, "2008": 4.0503887, "2010": 5.3752822, "2012": 6.3594888, "2014": 5.980947800000001, "2016": 4.7317625}, {"country": "Slovenia", "1991": null, "1992": null, "1995": 2.2333919, "1998": 2.4983706000000003, "2000": 2.3848083, "2002": 2.8769116, "2004": 4.2396592, "2006": 4.6560543, "2008": 4.4667838, "2010": 6.3216347, "2012": 7.0408626000000005, "2014": 6.7380298000000005, "2016": 4.996741200000001}, {"country": "Somalia", "1991": null, "1992": null, "1995": null, "1998": null, "2000": null, "2002": 1.3248935, "2004": 5.1481576, "2006": 2.8012034, "2008": 4.2396592, "2010": null, "2012": null, "2014": null, "2016": 5.3374281}, {"country": "South Africa", "1991": null, "1992": 1.9684132, "1995": 1.9305591000000002, "1998": 1.6277263, "2000": 1.892705, "2002": 1.6277263, "2004": 3.0661821000000002, "2006": 3.2175985000000003, "2008": 3.2933067, "2010": 4.5046379, "2012": 5.2238658, "2014": 4.5046379, "2016": 3.4825772}, {"country": "South Korea", "1991": 2.0441214000000003, "1992": null, "1995": 2.9904739000000005, "1998": 3.5204313000000003, "2000": 3.4825772, "2002": 4.1260969, "2004": 5.1103035000000006, "2006": 6.2459264999999995, "2008": 5.715969100000001, "2010": 5.7538232, "2012": 6.813738000000001, "2014": 5.8673855, "2016": 4.6182002}, {"country": "South Sudan", "1991": null, "1992": null, "1995": null, "1998": null, "2000": null, "2002": null, "2004": null, "2006": 6.6623216, "2008": 6.018801900000001, "2010": 5.678115, "2012": 7.4572577, "2014": 7.4951118, "2016": 1.0599148}, {"country": "Spain", "1991": null, "1992": null, "1995": 3.3690149000000003, "1998": 3.1797444, "2000": 2.7633493000000002, "2002": 3.1418903, "2004": 4.5803461, "2006": 4.3532215, "2008": 4.6560543, "2010": 5.905239600000001, "2012": 6.624467500000001, "2014": 6.1702183, "2016": 4.7696166}, {"country": "Sri Lanka", "1991": 2.8390575, "1992": null, "1995": 2.8390575, "1998": 3.1797444, "2000": 2.4983706000000003, "2002": 2.0441214000000003, "2004": 2.7254952, "2006": 3.3311608, "2008": 5.4131363, "2010": 4.5046379, "2012": 4.883178900000001, "2014": 4.8074707000000005, "2016": 3.3311608}, {"country": "Sudan", "1991": 0.2649787, "1992": 2.1955378, "1995": 1.892705, "1998": 1.2491853000000002, "2000": 1.0599148, "2002": 1.135623, "2004": 1.7791427, "2006": 2.7254952, "2008": 2.4605165, "2010": 2.3469542, "2012": 2.3848083, "2014": 3.1040362, "2016": 3.5961395}, {"country": "Suriname", "1991": null, "1992": null, "1995": null, "1998": 2.1198296, "2000": 2.1198296, "2002": 2.1198296, "2004": 1.892705, "2006": 3.5582854, "2008": 3.4447231000000005, "2010": 4.3153673999999995, "2012": 5.9430937, "2014": 4.883178900000001, "2016": null}, {"country": "Sweden", "1991": null, "1992": null, "1995": 4.4289297, "1998": 4.1260969, "2000": 3.5582854, "2002": 4.0125346, "2004": 5.715969100000001, "2006": 5.5266986000000005, "2008": 5.2238658, "2010": 7.078716700000001, "2012": 7.949361000000001, "2014": 6.889446200000001, "2016": 5.3752822}, {"country": "Switzerland", "1991": null, "1992": null, "1995": 3.8611182000000004, "1998": 3.2554526, "2000": 2.9526198000000003, "2002": 3.3690149000000003, "2004": 4.883178900000001, "2006": 4.8074707000000005, "2008": 4.921033, "2010": 6.2837806, "2012": 7.1165708, "2014": 6.5866134, "2016": 5.4888445}, {"country": "Syria", "1991": null, "1992": null, "1995": null, "1998": 1.7034345000000002, "2000": 1.6655804, "2002": 2.0062673, "2004": 1.7412886, "2006": 2.271246, "2008": 3.2175985000000003, "2010": 3.6339936, "2012": 2.9904739000000005, "2014": 3.1418903, "2016": null}, {"country": "Tajikistan", "1991": null, "1992": null, "1995": null, "1998": 0.9842066, "2000": 1.7034345000000002, "2002": 1.3627476, "2004": 2.5362247000000004, "2006": 3.028328, "2008": 3.8989723, "2010": 3.8611182000000004, "2012": 5.4888445, "2014": 4.996741200000001, "2016": 2.6876411}, {"country": "Tanzania", "1991": 1.5898722, "1992": 1.6277263, "1995": 2.1198296, "1998": 2.3848083, "2000": 2.8390575, "2002": 2.5362247000000004, "2004": 3.5204313000000003, "2006": 3.9368264, "2008": 4.2018051000000005, "2010": 4.6182002, "2012": 4.9588871, "2014": 4.883178900000001, "2016": 3.2933067}, {"country": "Thailand", "1991": 1.3627476, "1992": null, "1995": 1.2870394, "1998": 1.135623, "2000": 1.4763099000000002, "2002": 1.3627476, "2004": 2.0441214000000003, "2006": 2.649787, "2008": 3.2933067, "2010": 5.3374281, "2012": 5.905239600000001, "2014": 4.883178900000001, "2016": 2.6876411}, {"country": "Timor-Leste", "1991": null, "1992": null, "1995": null, "1998": null, "2000": null, "2002": null, "2004": 2.4605165, "2006": 3.7097018, "2008": 4.6182002, "2010": 5.299574, "2012": 6.2459264999999995, "2014": 4.4289297, "2016": 4.163951000000001}, {"country": "Togo", "1991": 3.0661821000000002, "1992": 2.7254952, "1995": 1.7791427, "1998": 1.5898722, "2000": 1.8169968, "2002": 2.1198296, "2004": 3.2175985000000003, "2006": 3.8989723, "2008": 3.3690149000000003, "2010": 4.4667838, "2012": 4.3910756, "2014": 4.7317625, "2016": 2.6876411}, {"country": "Trinidad and Tobago", "1991": null, "1992": null, "1995": null, "1998": 1.4763099000000002, "2000": 1.4763099000000002, "2002": 1.514164, "2004": 1.3248935, "2006": 1.6277263, "2008": 1.3627476, "2010": null, "2012": null, "2014": null, "2016": 2.0441214000000003}, {"country": "Tunisia", "1991": 2.1955378, "1992": 1.9684132, "1995": 2.4226624, "1998": 2.271246, "2000": 1.8548509, "2002": 1.0977689, "2004": 2.5740788, "2006": 3.1418903, "2008": 3.6339936, "2010": 3.5582854, "2012": 3.5204313000000003, "2014": 3.4447231000000005, "2016": 2.7633493000000002}, {"country": "Turkey", "1991": null, "1992": null, "1995": 2.1198296, "1998": 2.9526198000000003, "2000": 3.3311608, "2002": 3.8611182000000004, "2004": 5.4509904, "2006": 7.1165708, "2008": 7.078716700000001, "2010": 9.5392332, "2012": 9.614941400000001, "2014": 7.7979446, "2016": 5.3752822}, {"country": "Turkmenistan", "1991": null, "1992": null, "1995": null, "1998": 0.3406869, "2000": 0.0757082, "2002": 0.0757082, "2004": 0.0757082, "2006": 0.0757082, "2008": 0.8327902, "2010": 0.8327902, "2012": 0.8327902, "2014": 0.8327902, "2016": 1.0977689}, {"country": "Uganda", "1991": 2.6119329, "1992": 2.9904739000000005, "1995": 3.7097018, "1998": 3.2554526, "2000": 3.2554526, "2002": 3.1418903, "2004": 3.8611182000000004, "2006": 4.4289297, "2008": 4.921033, "2010": 5.3752822, "2012": null, "2014": 5.299574, "2016": 3.5582854}, {"country": "Ukraine", "1991": null, "1992": null, "1995": null, "1998": 1.8548509, "2000": 1.4006017, "2002": 1.7791427, "2004": 2.0819755000000004, "2006": 3.0661821000000002, "2008": 3.3311608, "2010": 3.8232641000000003, "2012": 5.1103035000000006, "2014": 4.4289297, "2016": 3.1418903}, {"country": "United Arab Emirates", "1991": null, "1992": null, "1995": null, "1998": 0.8706443, "2000": 0.9463525, "2002": 1.0977689, "2004": 1.0599148, "2006": 1.4006017, "2008": 1.7034345000000002, "2010": 1.7791427, "2012": 1.7791427, "2014": 1.7791427, "2016": 1.8548509}, {"country": "United Kingdom", "1991": null, "1992": null, "1995": 3.4825772, "1998": 4.2018051000000005, "2000": 4.4289297, "2002": 4.4667838, "2004": 5.905239600000001, "2006": 6.1702183, "2008": 5.4509904, "2010": 7.2679872, "2012": 8.2143397, "2014": 7.2679872, "2016": 5.5266986000000005}, {"country": "United States of America", "1991": null, "1992": 1.2113312, "1995": 1.2870394, "1998": 1.2113312, "2000": 1.7791427, "2002": 1.514164, "2004": 2.0441214000000003, "2006": 2.3848083, "2008": 2.1198296, "2010": 2.8769116, "2012": 3.6718477000000003, "2014": 2.8769116, "2016": 2.6876411}, {"country": "Uruguay", "1991": null, "1992": null, "1995": 3.3690149000000003, "1998": 3.4068690000000004, "2000": 4.5046379, "2002": 1.7412886, "2004": 4.2775133, "2006": 4.6560543, "2008": 4.4667838, "2010": 5.6402609, "2012": 7.4572577, "2014": 6.813738000000001, "2016": 5.678115}, {"country": "Uzbekistan", "1991": null, "1992": null, "1995": 1.2113312, "1998": 0.4163951, "2000": 0.5299574, "2002": 1.4384558, "2004": 1.3248935, "2006": 3.2175985000000003, "2008": 5.1103035000000006, "2010": 3.4825772, "2012": 3.8611182000000004, "2014": 3.8611182000000004, "2016": 3.8989723}, {"country": "Vanuatu", "1991": null, "1992": null, "1995": null, "1998": null, "2000": null, "2002": null, "2004": null, "2006": null, "2008": null, "2010": null, "2012": null, "2014": null, "2016": 4.9588871}, {"country": "Vietnam", "1991": null, "1992": null, "1995": 1.2870394, "1998": 1.3248935, "2000": 1.4384558, "2002": 1.2870394, "2004": 1.8169968, "2006": 2.5362247000000004, "2008": 3.028328, "2010": 3.3311608, "2012": 4.3532215, "2014": 3.9368264, "2016": 3.028328}, {"country": "Yemen", "1991": null, "1992": null, "1995": null, "1998": 0.9842066, "2000": 0.7949361, "2002": 0.7949361, "2004": 0.7192279, "2006": 1.135623, "2008": 1.135623, "2010": 1.3248935, "2012": 2.1955378, "2014": 2.649787, "2016": 3.4825772}, {"country": "Zambia", "1991": 1.514164, "1992": 2.7254952, "1995": 2.271246, "1998": 2.0062673, "2000": null, "2002": 2.7254952, "2004": 4.163951000000001, "2006": 4.9588871, "2008": 6.4351970000000005, "2010": 6.2837806, "2012": 5.6024068, "2014": 6.3594888, "2016": 5.299574}, {"country": "Zimbabwe", "1991": 2.5740788, "1992": 1.7791427, "1995": 1.4384558, "1998": 0.9842066, "2000": 3.2175985000000003, "2002": 0.1892705, "2004": 2.3091001, "2006": null, "2008": 4.921033, "2010": 4.883178900000001, "2012": 5.7538232, "2014": 5.905239600000001, "2016": 5.072449400000001}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

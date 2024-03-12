@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Aaron Toth">
+<meta name="dcterms.date" content="2024-03-10">
+
+<title>HW 3 Revision</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="HW_3_Revision_files/libs/clipboard/clipboard.min.js"></script>
+<script src="HW_3_Revision_files/libs/quarto-html/quarto.js"></script>
+<script src="HW_3_Revision_files/libs/quarto-html/popper.min.js"></script>
+<script src="HW_3_Revision_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="HW_3_Revision_files/libs/quarto-html/anchor.min.js"></script>
+<link href="HW_3_Revision_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="HW_3_Revision_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="HW_3_Revision_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="HW_3_Revision_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="HW_3_Revision_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">HW 3 Revision</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Aaron Toth </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 10, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>alt.data_transformers.disable_max_rows()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>DataTransformerRegistry.enable('default')</code></pre>
+</div>
+</div>
+<p><strong>HW 3 revision</strong>. We were just getting started with Vega-lite when you did HW 3. We’ve learned a lot about graphics since then, so here’s your chance to improve upon what you did in HW 3. We are going to focus on the genetics kit data. See HW3 for a reminder about the data and the task you had to do then.</p>
+<p>Note: I think some of you did not understand what “genetic share” means. 23 and Me calls this “ancestry composition” and describes it like this:</p>
+<blockquote class="blockquote">
+<p>Your Ancestry Composition report shows the percentage of your DNA that comes from each of 47 populations. We calculate your Ancestry Composition by comparing your genome to those of over 14,000 people with known ancestry. When a segment of your DNA closely matches the DNA from one of the 47 populations, we assign that ancestry to the corresponding segment of your DNA. We calculate the ancestry for individual segments of your genome separately, then add them together to compute your overall ancestry composition. Read more.</p>
+</blockquote>
+<p>The assignment:</p>
+<ul>
+<li><p><strong>Scroll through the HW 3 Gallery to see the plots we created at that time. Find an example that has that has something you like about it and explain what you like.</strong></p>
+<p>I really like Noelle’s first graphic for comparing twins. The stacked bar chart makes sense because <code>genetic share</code> should sum to 1.0, or 100%. The shares can be thought of as additive, which makes the stacked bar valuable. Furthermore, differences between twins are highlighted because there are only two bars and all three tests are shown through faceting.</p></li>
+<li><p><strong>Find an example that has something you don’t like, and explain what you don’t like about it.</strong></p>
+<p>One thing that I saw in a few graphics that I didn’t like is mapping <code>genetic share</code> to something without considering <code>genetic share</code> of <em>what</em>. The variable only contains information insofar as it describes the share of one’s genome that an be traced back to a certain region of the world. One specific example of this comes from Gloria’s first graphic, which tells us that 100% of each twin’s genetic share comes from somewhere. It looks like the chart may be stacked though–in this case all she would have needed to do is map color to origin (but obviously we were just learning at this point).</p></li>
+<li><p><strong>Now create two graphics, one that helps compare the kits and one that helps compare twins. Give your graphics good titles and use other principles of good visualization.</strong> <strong>Include a paragraph that tells the story of your graphic.</strong></p></li>
+</ul>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">## reading in the data </span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>twins_long_url <span class="op">=</span> <span class="st">"https://calvin-data304.netlify.app/data/twins-genetics-long.json"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>twins_long <span class="op">=</span> pd.read_json(twins_long_url)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>twins_wide_url <span class="op">=</span> <span class="st">"https://calvin-data304.netlify.app/data/twins-genetics-wide.json"</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>twins_wide <span class="op">=</span> pd.read_json(twins_wide_url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><strong>Comparing Kits</strong></li>
+</ul>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">## setting up all the parameters </span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>kits <span class="op">=</span> [<span class="st">'Ancestry'</span>, <span class="st">'23andMe'</span>, <span class="st">'MyHeritage'</span>]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">## making the repeat chart </span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>base <span class="op">=</span> alt.Chart(twins_wide).mark_point().properties(</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  width <span class="op">=</span> <span class="dv">160</span>, height <span class="op">=</span> <span class="dv">160</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>chart1 <span class="op">=</span> base.encode(</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    alt.X(field <span class="op">=</span> <span class="st">'Ancestry'</span>, <span class="bu">type</span> <span class="op">=</span> <span class="st">"quantitative"</span>),</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    alt.Y(field <span class="op">=</span> <span class="st">'23andMe'</span>, <span class="bu">type</span> <span class="op">=</span> <span class="st">"quantitative"</span>),</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    color <span class="op">=</span> <span class="st">'region'</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>chart2 <span class="op">=</span> base.encode(</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    alt.X(field <span class="op">=</span> <span class="st">'Ancestry'</span>, <span class="bu">type</span> <span class="op">=</span> <span class="st">"quantitative"</span>),</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    alt.Y(field <span class="op">=</span> <span class="st">'MyHeritage'</span>, <span class="bu">type</span> <span class="op">=</span> <span class="st">"quantitative"</span>),</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    color <span class="op">=</span> <span class="st">'region'</span>) </span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>chart3 <span class="op">=</span> base.encode(</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    alt.X(field <span class="op">=</span> <span class="st">'23andMe'</span>, <span class="bu">type</span> <span class="op">=</span> <span class="st">"quantitative"</span>),</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    alt.Y(field <span class="op">=</span> <span class="st">'MyHeritage'</span>, <span class="bu">type</span> <span class="op">=</span> <span class="st">"quantitative"</span>),</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    color <span class="op">=</span> <span class="st">'region'</span>)   </span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>xyrule <span class="op">=</span> alt.Chart().mark_rule().encode(</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> alt.datum(<span class="dv">0</span>),</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  x2 <span class="op">=</span> alt.datum(<span class="dv">1</span>),</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> alt.datum(<span class="dv">0</span>),</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>  y2 <span class="op">=</span> alt.datum(<span class="dv">1</span>))</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>((chart1 <span class="op">+</span> xyrule) <span class="op">|</span> (chart2 <span class="op">+</span> xyrule) <span class="op">|</span> (chart3 <span class="op">+</span> xyrule)).properties(title <span class="op">=</span> alt.Title(<span class="st">"Ancestry results show less correlation with other tests"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+
+<style>
+  #altair-viz-2e6d9787c2d8479f8140b4998338eeaa.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-2e6d9787c2d8479f8140b4998338eeaa.vega-embed details,
+  #altair-viz-2e6d9787c2d8479f8140b4998338eeaa.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-2e6d9787c2d8479f8140b4998338eeaa"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-2e6d9787c2d8479f8140b4998338eeaa") {
+      outputDiv = document.getElementById("altair-viz-2e6d9787c2d8479f8140b4998338eeaa");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.15.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.15.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "hconcat": [{"layer": [{"data": {"name": "data-ea15dbf1f76fc51009d1b4e9968e8503"}, "mark": {"type": "point"}, "encoding": {"color": {"field": "region", "type": "nominal"}, "x": {"field": "Ancestry", "type": "quantitative"}, "y": {"field": "23andMe", "type": "quantitative"}}}, {"data": {"name": "empty"}, "mark": {"type": "rule"}, "encoding": {"x": {"datum": 0}, "x2": {"datum": 1}, "y": {"datum": 0}, "y2": {"datum": 1}}}], "height": 160, "width": 160}, {"layer": [{"data": {"name": "data-ea15dbf1f76fc51009d1b4e9968e8503"}, "mark": {"type": "point"}, "encoding": {"color": {"field": "region", "type": "nominal"}, "x": {"field": "Ancestry", "type": "quantitative"}, "y": {"field": "MyHeritage", "type": "quantitative"}}}, {"data": {"name": "empty"}, "mark": {"type": "rule"}, "encoding": {"x": {"datum": 0}, "x2": {"datum": 1}, "y": {"datum": 0}, "y2": {"datum": 1}}}], "height": 160, "width": 160}, {"layer": [{"data": {"name": "data-ea15dbf1f76fc51009d1b4e9968e8503"}, "mark": {"type": "point"}, "encoding": {"color": {"field": "region", "type": "nominal"}, "x": {"field": "23andMe", "type": "quantitative"}, "y": {"field": "MyHeritage", "type": "quantitative"}}}, {"data": {"name": "empty"}, "mark": {"type": "rule"}, "encoding": {"x": {"datum": 0}, "x2": {"datum": 1}, "y": {"datum": 0}, "y2": {"datum": 1}}}], "height": 160, "width": 160}], "title": {"text": "Ancestry results show less correlation with other tests"}, "$schema": "https://vega.github.io/schema/vega-lite/v5.15.1.json", "datasets": {"data-ea15dbf1f76fc51009d1b4e9968e8503": [{"twin": "1A", "pair": 1, "id": "A", "region": "NW Europe", "Ancestry": 0.9, "23andMe": 0.676, "MyHeritage": 0.647}, {"twin": "1A", "pair": 1, "id": "A", "region": "SE Europe", "Ancestry": 0.1, "23andMe": 0.32, "MyHeritage": 0.333}, {"twin": "1B", "pair": 1, "id": "B", "region": "NW Europe", "Ancestry": 0.9, "23andMe": 0.6910000000000001, "MyHeritage": 0.687}, {"twin": "1B", "pair": 1, "id": "B", "region": "SE Europe", "Ancestry": 0.1, "23andMe": 0.305, "MyHeritage": 0.23900000000000002}, {"twin": "2A", "pair": 2, "id": "A", "region": "West Africa", "Ancestry": 0.65, "23andMe": 0.762, "MyHeritage": 0.6960000000000001}, {"twin": "2A", "pair": 2, "id": "A", "region": "Central Africa", "Ancestry": 0.22, "23andMe": 0.076, "MyHeritage": 0.12}, {"twin": "2A", "pair": 2, "id": "A", "region": "NW Europe", "Ancestry": 0.12, "23andMe": 0.139, "MyHeritage": 0.10400000000000001}, {"twin": "2A", "pair": 2, "id": "A", "region": "SE Europe", "Ancestry": 0.01, "23andMe": 0.006, "MyHeritage": 0.0}, {"twin": "2B", "pair": 2, "id": "B", "region": "West Africa", "Ancestry": 0.64, "23andMe": 0.76, "MyHeritage": 0.6880000000000001}, {"twin": "2B", "pair": 2, "id": "B", "region": "Central Africa", "Ancestry": 0.23, "23andMe": 0.078, "MyHeritage": 0.112}, {"twin": "2B", "pair": 2, "id": "B", "region": "NW Europe", "Ancestry": 0.12, "23andMe": 0.131, "MyHeritage": 0.106}, {"twin": "2B", "pair": 2, "id": "B", "region": "SE Europe", "Ancestry": 0.01, "23andMe": 0.006, "MyHeritage": 0.0}, {"twin": "3A", "pair": 3, "id": "A", "region": "NW Europe", "Ancestry": 0.99, "23andMe": 0.987, "MyHeritage": 0.992}, {"twin": "3A", "pair": 3, "id": "A", "region": "West Africa", "Ancestry": 0.01, "23andMe": 0.07, "MyHeritage": 0.0}, {"twin": "3B", "pair": 3, "id": "B", "region": "NW Europe", "Ancestry": 0.99, "23andMe": 0.987, "MyHeritage": 0.981}, {"twin": "3B", "pair": 3, "id": "B", "region": "West Africa", "Ancestry": 0.01, "23andMe": 0.01, "MyHeritage": 0.0}, {"twin": "4A", "pair": 4, "id": "A", "region": "West Africa", "Ancestry": 0.6000000000000001, "23andMe": 0.772, "MyHeritage": 0.6920000000000001}, {"twin": "4A", "pair": 4, "id": "A", "region": "Central Africa", "Ancestry": 0.27, "23andMe": 0.076, "MyHeritage": 0.076}, {"twin": "4A", "pair": 4, "id": "A", "region": "NW Europe", "Ancestry": 0.12, "23andMe": 0.125, "MyHeritage": 0.092}, {"twin": "4B", "pair": 4, "id": "B", "region": "West Africa", "Ancestry": 0.6000000000000001, "23andMe": 0.768, "MyHeritage": 0.707}, {"twin": "4B", "pair": 4, "id": "B", "region": "Central Africa", "Ancestry": 0.27, "23andMe": 0.08, "MyHeritage": 0.068}, {"twin": "4B", "pair": 4, "id": "B", "region": "NW Europe", "Ancestry": 0.12, "23andMe": 0.115, "MyHeritage": 0.088}, {"twin": "4B", "pair": 4, "id": "B", "region": "East Asia", "Ancestry": 0.01, "23andMe": 0.017, "MyHeritage": 0.0}, {"twin": "4B", "pair": 4, "id": "B", "region": "SE Europe", "Ancestry": 0.0, "23andMe": 0.009000000000000001, "MyHeritage": 0.094}, {"twin": "5A", "pair": 5, "id": "A", "region": "East Asia", "Ancestry": 1.0, "23andMe": 1.0, "MyHeritage": 0.978}, {"twin": "5B", "pair": 5, "id": "B", "region": "East Asia", "Ancestry": 1.0, "23andMe": 1.0, "MyHeritage": 0.973}, {"twin": "6A", "pair": 6, "id": "A", "region": "West Africa", "Ancestry": 0.62, "23andMe": 0.636, "MyHeritage": 0.61}, {"twin": "6A", "pair": 6, "id": "A", "region": "NW Europe", "Ancestry": 0.23, "23andMe": 0.245, "MyHeritage": 0.251}, {"twin": "6A", "pair": 6, "id": "A", "region": "Central Africa", "Ancestry": 0.12, "23andMe": 0.1, "MyHeritage": 0.11}, {"twin": "6A", "pair": 6, "id": "A", "region": "East Asia", "Ancestry": 0.01, "23andMe": 0.006, "MyHeritage": 0.0}, {"twin": "6B", "pair": 6, "id": "B", "region": "West Africa", "Ancestry": 0.62, "23andMe": 0.634, "MyHeritage": 0.624}, {"twin": "6B", "pair": 6, "id": "B", "region": "NW Europe", "Ancestry": 0.23, "23andMe": 0.247, "MyHeritage": 0.25}, {"twin": "6B", "pair": 6, "id": "B", "region": "Central Africa", "Ancestry": 0.13, "23andMe": 0.1, "MyHeritage": 0.089}, {"twin": "6B", "pair": 6, "id": "B", "region": "East Asia", "Ancestry": 0.01, "23andMe": 0.006, "MyHeritage": 0.0}], "empty": [{}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<p>For this graphic, I really wanted to look at a scatterplot of the different kits’ test results to see how well they correlated with each other. This seems like the simplest way to compare them, but it might not be the most accessible for people who don’t know what they’re looking for. That is why I decided to spend some time working out how to graph an x=y line on each section of the concatenated graphic. Viewers can see how far points are from perfect correlation more easily while it is there.</p>
+<p>I tried to use the <code>.repeat()</code> method at first, but Altair does not like it when you layer and repeat at the same time so I ended up making this graphic manually and using a horizontal concatenation.</p>
+<p>One thing that I had to teach myself for this graphic was how to use <code>.mark_rule()</code>. We talked about it existing neat the beginning of the semester, but we never used it in Altair. I relied on the documentation <a href="https://altair-viz.github.io/user_guide/marks/rule.html">here</a> for guidance.</p>
+<ul>
+<li><strong>Comparing Twins</strong></li>
+</ul>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>chart2 <span class="op">=</span> alt.Chart(twins_long).mark_bar(width <span class="op">=</span> <span class="dv">30</span>).encode(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    alt.X(field <span class="op">=</span> <span class="st">"id"</span>, <span class="bu">type</span> <span class="op">=</span> <span class="st">"nominal"</span>),</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(field <span class="op">=</span> <span class="st">"genetic share"</span>, <span class="bu">type</span> <span class="op">=</span> <span class="st">"quantitative"</span>, aggregate <span class="op">=</span> <span class="st">'mean'</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    alt.Tooltip(field<span class="op">=</span> <span class="st">'genetic share'</span>, <span class="bu">type</span> <span class="op">=</span> <span class="st">"quantitative"</span>, aggregate <span class="op">=</span> <span class="st">'mean'</span>),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    color <span class="op">=</span> <span class="st">'region:N'</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>).properties(</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  width <span class="op">=</span> <span class="dv">80</span>, </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  height <span class="op">=</span> <span class="dv">300</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>) </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>onerule <span class="op">=</span> alt.Chart().mark_rule(color<span class="op">=</span><span class="st">'gray'</span>).encode(</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> alt.datum(<span class="dv">1</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>alt.layer(chart2, onerule, data<span class="op">=</span> twins_long).facet(column <span class="op">=</span> <span class="st">'pair:O'</span>).properties(</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  title <span class="op">=</span> alt.Title(<span class="st">'Pairs of Twins have Similar Genetic Makeup'</span>, subtitle <span class="op">=</span> <span class="st">'Average results of three ancestry tests show slight yet unexpected differences'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+
+<style>
+  #altair-viz-6b8ef9903656411c9d05b95006bd4382.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-6b8ef9903656411c9d05b95006bd4382.vega-embed details,
+  #altair-viz-6b8ef9903656411c9d05b95006bd4382.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-6b8ef9903656411c9d05b95006bd4382"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-6b8ef9903656411c9d05b95006bd4382") {
+      outputDiv = document.getElementById("altair-viz-6b8ef9903656411c9d05b95006bd4382");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.15.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.15.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"name": "data-d326f59fb055d02b60a6ba4fbce8a5a1"}, "facet": {"column": {"field": "pair", "type": "ordinal"}}, "spec": {"layer": [{"mark": {"type": "bar", "width": 30}, "encoding": {"color": {"field": "region", "type": "nominal"}, "tooltip": {"aggregate": "mean", "field": "genetic share", "type": "quantitative"}, "x": {"field": "id", "type": "nominal"}, "y": {"aggregate": "mean", "field": "genetic share", "type": "quantitative"}}}, {"mark": {"type": "rule", "color": "gray"}, "encoding": {"y": {"datum": 1}}}], "height": 300, "width": 80}, "title": {"text": "Pairs of Twins have Similar Genetic Makeup", "subtitle": "Average results of three ancestry tests show slight yet unexpected differences"}, "$schema": "https://vega.github.io/schema/vega-lite/v5.15.1.json", "datasets": {"data-d326f59fb055d02b60a6ba4fbce8a5a1": [{"twin": "1A", "pair": 1, "id": "A", "region": "NW Europe", "kit": "Ancestry", "genetic share": 0.9}, {"twin": "1A", "pair": 1, "id": "A", "region": "NW Europe", "kit": "23andMe", "genetic share": 0.676}, {"twin": "1A", "pair": 1, "id": "A", "region": "NW Europe", "kit": "MyHeritage", "genetic share": 0.647}, {"twin": "1A", "pair": 1, "id": "A", "region": "SE Europe", "kit": "Ancestry", "genetic share": 0.1}, {"twin": "1A", "pair": 1, "id": "A", "region": "SE Europe", "kit": "23andMe", "genetic share": 0.32}, {"twin": "1A", "pair": 1, "id": "A", "region": "SE Europe", "kit": "MyHeritage", "genetic share": 0.333}, {"twin": "1B", "pair": 1, "id": "B", "region": "NW Europe", "kit": "Ancestry", "genetic share": 0.9}, {"twin": "1B", "pair": 1, "id": "B", "region": "NW Europe", "kit": "23andMe", "genetic share": 0.6910000000000001}, {"twin": "1B", "pair": 1, "id": "B", "region": "NW Europe", "kit": "MyHeritage", "genetic share": 0.687}, {"twin": "1B", "pair": 1, "id": "B", "region": "SE Europe", "kit": "Ancestry", "genetic share": 0.1}, {"twin": "1B", "pair": 1, "id": "B", "region": "SE Europe", "kit": "23andMe", "genetic share": 0.305}, {"twin": "1B", "pair": 1, "id": "B", "region": "SE Europe", "kit": "MyHeritage", "genetic share": 0.23900000000000002}, {"twin": "2A", "pair": 2, "id": "A", "region": "West Africa", "kit": "Ancestry", "genetic share": 0.65}, {"twin": "2A", "pair": 2, "id": "A", "region": "West Africa", "kit": "23andMe", "genetic share": 0.762}, {"twin": "2A", "pair": 2, "id": "A", "region": "West Africa", "kit": "MyHeritage", "genetic share": 0.6960000000000001}, {"twin": "2A", "pair": 2, "id": "A", "region": "Central Africa", "kit": "Ancestry", "genetic share": 0.22}, {"twin": "2A", "pair": 2, "id": "A", "region": "Central Africa", "kit": "23andMe", "genetic share": 0.076}, {"twin": "2A", "pair": 2, "id": "A", "region": "Central Africa", "kit": "MyHeritage", "genetic share": 0.12}, {"twin": "2A", "pair": 2, "id": "A", "region": "NW Europe", "kit": "Ancestry", "genetic share": 0.12}, {"twin": "2A", "pair": 2, "id": "A", "region": "NW Europe", "kit": "23andMe", "genetic share": 0.139}, {"twin": "2A", "pair": 2, "id": "A", "region": "NW Europe", "kit": "MyHeritage", "genetic share": 0.10400000000000001}, {"twin": "2A", "pair": 2, "id": "A", "region": "SE Europe", "kit": "Ancestry", "genetic share": 0.01}, {"twin": "2A", "pair": 2, "id": "A", "region": "SE Europe", "kit": "23andMe", "genetic share": 0.006}, {"twin": "2A", "pair": 2, "id": "A", "region": "SE Europe", "kit": "MyHeritage", "genetic share": 0.0}, {"twin": "2B", "pair": 2, "id": "B", "region": "West Africa", "kit": "Ancestry", "genetic share": 0.64}, {"twin": "2B", "pair": 2, "id": "B", "region": "West Africa", "kit": "23andMe", "genetic share": 0.76}, {"twin": "2B", "pair": 2, "id": "B", "region": "West Africa", "kit": "MyHeritage", "genetic share": 0.6880000000000001}, {"twin": "2B", "pair": 2, "id": "B", "region": "Central Africa", "kit": "Ancestry", "genetic share": 0.23}, {"twin": "2B", "pair": 2, "id": "B", "region": "Central Africa", "kit": "23andMe", "genetic share": 0.078}, {"twin": "2B", "pair": 2, "id": "B", "region": "Central Africa", "kit": "MyHeritage", "genetic share": 0.112}, {"twin": "2B", "pair": 2, "id": "B", "region": "NW Europe", "kit": "Ancestry", "genetic share": 0.12}, {"twin": "2B", "pair": 2, "id": "B", "region": "NW Europe", "kit": "23andMe", "genetic share": 0.131}, {"twin": "2B", "pair": 2, "id": "B", "region": "NW Europe", "kit": "MyHeritage", "genetic share": 0.106}, {"twin": "2B", "pair": 2, "id": "B", "region": "SE Europe", "kit": "Ancestry", "genetic share": 0.01}, {"twin": "2B", "pair": 2, "id": "B", "region": "SE Europe", "kit": "23andMe", "genetic share": 0.006}, {"twin": "2B", "pair": 2, "id": "B", "region": "SE Europe", "kit": "MyHeritage", "genetic share": 0.0}, {"twin": "3A", "pair": 3, "id": "A", "region": "NW Europe", "kit": "Ancestry", "genetic share": 0.99}, {"twin": "3A", "pair": 3, "id": "A", "region": "NW Europe", "kit": "23andMe", "genetic share": 0.987}, {"twin": "3A", "pair": 3, "id": "A", "region": "NW Europe", "kit": "MyHeritage", "genetic share": 0.992}, {"twin": "3A", "pair": 3, "id": "A", "region": "West Africa", "kit": "Ancestry", "genetic share": 0.01}, {"twin": "3A", "pair": 3, "id": "A", "region": "West Africa", "kit": "23andMe", "genetic share": 0.07}, {"twin": "3A", "pair": 3, "id": "A", "region": "West Africa", "kit": "MyHeritage", "genetic share": 0.0}, {"twin": "3B", "pair": 3, "id": "B", "region": "NW Europe", "kit": "Ancestry", "genetic share": 0.99}, {"twin": "3B", "pair": 3, "id": "B", "region": "NW Europe", "kit": "23andMe", "genetic share": 0.987}, {"twin": "3B", "pair": 3, "id": "B", "region": "NW Europe", "kit": "MyHeritage", "genetic share": 0.981}, {"twin": "3B", "pair": 3, "id": "B", "region": "West Africa", "kit": "Ancestry", "genetic share": 0.01}, {"twin": "3B", "pair": 3, "id": "B", "region": "West Africa", "kit": "23andMe", "genetic share": 0.01}, {"twin": "3B", "pair": 3, "id": "B", "region": "West Africa", "kit": "MyHeritage", "genetic share": 0.0}, {"twin": "4A", "pair": 4, "id": "A", "region": "West Africa", "kit": "Ancestry", "genetic share": 0.6000000000000001}, {"twin": "4A", "pair": 4, "id": "A", "region": "West Africa", "kit": "23andMe", "genetic share": 0.772}, {"twin": "4A", "pair": 4, "id": "A", "region": "West Africa", "kit": "MyHeritage", "genetic share": 0.6920000000000001}, {"twin": "4A", "pair": 4, "id": "A", "region": "Central Africa", "kit": "Ancestry", "genetic share": 0.27}, {"twin": "4A", "pair": 4, "id": "A", "region": "Central Africa", "kit": "23andMe", "genetic share": 0.076}, {"twin": "4A", "pair": 4, "id": "A", "region": "Central Africa", "kit": "MyHeritage", "genetic share": 0.076}, {"twin": "4A", "pair": 4, "id": "A", "region": "NW Europe", "kit": "Ancestry", "genetic share": 0.12}, {"twin": "4A", "pair": 4, "id": "A", "region": "NW Europe", "kit": "23andMe", "genetic share": 0.125}, {"twin": "4A", "pair": 4, "id": "A", "region": "NW Europe", "kit": "MyHeritage", "genetic share": 0.092}, {"twin": "4B", "pair": 4, "id": "B", "region": "West Africa", "kit": "Ancestry", "genetic share": 0.6000000000000001}, {"twin": "4B", "pair": 4, "id": "B", "region": "West Africa", "kit": "23andMe", "genetic share": 0.768}, {"twin": "4B", "pair": 4, "id": "B", "region": "West Africa", "kit": "MyHeritage", "genetic share": 0.707}, {"twin": "4B", "pair": 4, "id": "B", "region": "Central Africa", "kit": "Ancestry", "genetic share": 0.27}, {"twin": "4B", "pair": 4, "id": "B", "region": "Central Africa", "kit": "23andMe", "genetic share": 0.08}, {"twin": "4B", "pair": 4, "id": "B", "region": "Central Africa", "kit": "MyHeritage", "genetic share": 0.068}, {"twin": "4B", "pair": 4, "id": "B", "region": "NW Europe", "kit": "Ancestry", "genetic share": 0.12}, {"twin": "4B", "pair": 4, "id": "B", "region": "NW Europe", "kit": "23andMe", "genetic share": 0.115}, {"twin": "4B", "pair": 4, "id": "B", "region": "NW Europe", "kit": "MyHeritage", "genetic share": 0.088}, {"twin": "4B", "pair": 4, "id": "B", "region": "East Asia", "kit": "Ancestry", "genetic share": 0.01}, {"twin": "4B", "pair": 4, "id": "B", "region": "East Asia", "kit": "23andMe", "genetic share": 0.017}, {"twin": "4B", "pair": 4, "id": "B", "region": "East Asia", "kit": "MyHeritage", "genetic share": 0.0}, {"twin": "4B", "pair": 4, "id": "B", "region": "SE Europe", "kit": "Ancestry", "genetic share": 0.0}, {"twin": "4B", "pair": 4, "id": "B", "region": "SE Europe", "kit": "23andMe", "genetic share": 0.009000000000000001}, {"twin": "4B", "pair": 4, "id": "B", "region": "SE Europe", "kit": "MyHeritage", "genetic share": 0.094}, {"twin": "5A", "pair": 5, "id": "A", "region": "East Asia", "kit": "Ancestry", "genetic share": 1.0}, {"twin": "5A", "pair": 5, "id": "A", "region": "East Asia", "kit": "23andMe", "genetic share": 1.0}, {"twin": "5A", "pair": 5, "id": "A", "region": "East Asia", "kit": "MyHeritage", "genetic share": 0.978}, {"twin": "5B", "pair": 5, "id": "B", "region": "East Asia", "kit": "Ancestry", "genetic share": 1.0}, {"twin": "5B", "pair": 5, "id": "B", "region": "East Asia", "kit": "23andMe", "genetic share": 1.0}, {"twin": "5B", "pair": 5, "id": "B", "region": "East Asia", "kit": "MyHeritage", "genetic share": 0.973}, {"twin": "6A", "pair": 6, "id": "A", "region": "West Africa", "kit": "Ancestry", "genetic share": 0.62}, {"twin": "6A", "pair": 6, "id": "A", "region": "West Africa", "kit": "23andMe", "genetic share": 0.636}, {"twin": "6A", "pair": 6, "id": "A", "region": "West Africa", "kit": "MyHeritage", "genetic share": 0.61}, {"twin": "6A", "pair": 6, "id": "A", "region": "NW Europe", "kit": "Ancestry", "genetic share": 0.23}, {"twin": "6A", "pair": 6, "id": "A", "region": "NW Europe", "kit": "23andMe", "genetic share": 0.245}, {"twin": "6A", "pair": 6, "id": "A", "region": "NW Europe", "kit": "MyHeritage", "genetic share": 0.251}, {"twin": "6A", "pair": 6, "id": "A", "region": "Central Africa", "kit": "Ancestry", "genetic share": 0.12}, {"twin": "6A", "pair": 6, "id": "A", "region": "Central Africa", "kit": "23andMe", "genetic share": 0.1}, {"twin": "6A", "pair": 6, "id": "A", "region": "Central Africa", "kit": "MyHeritage", "genetic share": 0.11}, {"twin": "6A", "pair": 6, "id": "A", "region": "East Asia", "kit": "Ancestry", "genetic share": 0.01}, {"twin": "6A", "pair": 6, "id": "A", "region": "East Asia", "kit": "23andMe", "genetic share": 0.006}, {"twin": "6A", "pair": 6, "id": "A", "region": "East Asia", "kit": "MyHeritage", "genetic share": 0.0}, {"twin": "6B", "pair": 6, "id": "B", "region": "West Africa", "kit": "Ancestry", "genetic share": 0.62}, {"twin": "6B", "pair": 6, "id": "B", "region": "West Africa", "kit": "23andMe", "genetic share": 0.634}, {"twin": "6B", "pair": 6, "id": "B", "region": "West Africa", "kit": "MyHeritage", "genetic share": 0.624}, {"twin": "6B", "pair": 6, "id": "B", "region": "NW Europe", "kit": "Ancestry", "genetic share": 0.23}, {"twin": "6B", "pair": 6, "id": "B", "region": "NW Europe", "kit": "23andMe", "genetic share": 0.247}, {"twin": "6B", "pair": 6, "id": "B", "region": "NW Europe", "kit": "MyHeritage", "genetic share": 0.25}, {"twin": "6B", "pair": 6, "id": "B", "region": "Central Africa", "kit": "Ancestry", "genetic share": 0.13}, {"twin": "6B", "pair": 6, "id": "B", "region": "Central Africa", "kit": "23andMe", "genetic share": 0.1}, {"twin": "6B", "pair": 6, "id": "B", "region": "Central Africa", "kit": "MyHeritage", "genetic share": 0.089}, {"twin": "6B", "pair": 6, "id": "B", "region": "East Asia", "kit": "Ancestry", "genetic share": 0.01}, {"twin": "6B", "pair": 6, "id": "B", "region": "East Asia", "kit": "23andMe", "genetic share": 0.006}, {"twin": "6B", "pair": 6, "id": "B", "region": "East Asia", "kit": "MyHeritage", "genetic share": 0.0}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<p>For this chart I don’t care about the differences between tests, so I took the average of the genetic share (made easier by the long data format). This allowed me to focus on the differences between twins while not excluding any information.</p>
+<p>This graphic follows the ideas of ________________FINISH ABOUT SIMPLE GRAPHICS_______________</p>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

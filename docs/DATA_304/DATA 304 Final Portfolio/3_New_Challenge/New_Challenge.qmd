@@ -1,0 +1,91 @@
+---
+title: "New Challenge"
+author: "Aaron Toth"
+date: "2024-04-10"
+output:
+  html_document:
+    toc: true
+    theme: readable
+---
+
+```{python}
+import pandas as pd 
+import altair as alt 
+import numpy as np
+alt.data_transformers.disable_max_rows()
+
+```
+
+```{python}
+DHS_Tanzania_Data= pd.read_csv('data/DHS_Tanzania_Data.csv')
+DHS_Tanzania_Data
+```
+
+```{python}
+## line charts
+need_chart = alt.Chart(DHS_Tanzania_Data).mark_line(
+  color = 'goldenrod', 
+  interpolate = "natural", 
+  point = alt.OverlayMarkDef(fill= 'goldenrod')
+).encode(
+  alt.X(
+    field= 'survey_year', 
+    type= 'ordinal').axis(
+      labelAngle = 45, 
+      title = ''
+      ),
+  alt.Y(
+    field= 'percent_unmet_family_planning_need', 
+    type= 'quantitative').axis(
+      title= 'Percent')
+  )
+
+contreception_chart = alt.Chart(DHS_Tanzania_Data).mark_line(
+  color = 'maroon', 
+  interpolate = "natural", 
+  point = alt.OverlayMarkDef(fill= 'maroon')
+).encode(
+  alt.X(
+    field= 'survey_year', 
+    type= 'ordinal').axis(
+      labelAngle = 45, 
+      title = ''
+      ),
+  alt.Y(
+    field= 'percent_use_modern_contraception', 
+    type= 'quantitative').axis(
+      title= 'Percent')
+  )
+
+label1 = alt.Chart().mark_text(
+  color= 'maroon',
+  align= 'left', 
+  baseline= 'top'
+).encode(
+  x= alt.value(170),
+  y= alt.value(23),
+  text= alt.value('Current Use of a Modern Contraception (%)')
+) 
+
+label2 = alt.Chart().mark_text(
+  color= 'goldenrod',
+  align= 'left', 
+  baseline= 'top'
+).encode(
+  x= alt.value(65),
+  y= alt.value(78),
+  text= alt.value('Unmet Family Planning Need (%)')
+)
+
+labels = label1 + label2
+
+(need_chart + contreception_chart + labels).properties(
+  width = 450, 
+  height = 300, 
+  title= 'Family Planning Needs Persist Despite Increased Prevalence Contraceptives')
+
+```
+
+This simple looking graphic shows how, despite increasing prevalence of modern contraceptives, family planning needs are still unmet in Tanzania. The graphic prompts viewers to think about why that might be. Is it because of a lack of education around how to properly use contraceptives? Or do women lack access to other family planning resources such as support groups?
+
+On this graphic, I really dove into the labeling. Vega lets us customize *everything* if we want to. I was able to place custom text at custom coordinates and match the text color to the lines that it is labeling. We discussed doing this in class, but I never had a chance to try it myself until now.

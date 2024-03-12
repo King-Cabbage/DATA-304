@@ -1,0 +1,153 @@
+---
+title: "Mango Masterpiece"
+author: "Aaron Toth"
+date: "2024-04-10"
+output:
+  html_document:
+    toc: true
+    theme: readable
+---
+
+```{r}
+## trying the r package!
+library(vegabrite)
+library(tidyverse)
+```
+
+The data for this visualization come from [FAOSTAT](https://data.un.org/Data.aspx?d=FAO&f=itemCode%3a571&c=2,4,5,6,7&s=countryName:asc,elementCode:asc,year:desc&v=3), published by the Food and Agriculture Administration.
+
+```{r}
+## reading in the CSV
+mango_data = read_csv("data/UNdata_Export_20240311_114817217.csv")
+
+```
+
+```{r}
+## tidying data in r 
+mango_data_wide <- mango_data %>% 
+  select('Country or Area', 'Element', 'Year', 'Value') %>% 
+  drop_na() %>%
+  pivot_wider(names_from = 'Element', values_from = 'Value') %>%
+  rename('production_index_per_capita' = 'Gross per capita Production Index Number (2014-2016 = 100)',
+         'production_index' = 'Gross Production Index Number (2014-2016 = 100)') %>% 
+  filter(`Area harvested` > 0) 
+
+mango_data_wide_country <- mango_data_wide %>% 
+  rename('Country' = 'Country or Area') %>% 
+  filter(!Country %in% c('World', 'Asia', 'Africa', 'Americas', 'Australia and New Zealand', 'Central America', 'Other non-specified areas', 'China, mainland', 'Land Locked Developing Countries', 'Least Developed Countries', 'Low Income Food Deficit Countries', 'Net Food Importing Developing Countries', 'Northern Africa', 'Northern America', 'Oceania', 'Polynesia', 'Puerto Rico', 'Réunion', 'Small Island Developing States', 'South America', 'South-eastern Asia', 'Southern Africa', 'Southern Asia', 'Western Africa', 'Western Asia', 'Caribbean', 'Eastern Asia', 'Eastern Africa'))
+
+mango_data_wide_region <- mango_data_wide %>% 
+  rename('Region' = 'Country or Area') %>% 
+  filter(Region %in% c('Central America', 'South America', 'South-eastern Asia', 'Southern Asia', 'Western Africa', 'Eastern Asia', 'Eastern Africa', 'Southern Africa', 'Northern Africa', 'Northern America'))  ## only regions where mangoes are grown
+
+mango_data_wide_region
+
+```
+
+I have some timseries data here. As [Wilke](https://clauswilke.com/dataviz/visualizing-trends.html#showing-trends-with-a-defined-functional-form) writes:
+
+> "When making scatter plots or time series , we are often more interested in the overarching trend of the data than in the specific detail of where each individual data point lies"
+
+This led me to connect my timeseries and scatterplot data, rather than just presenting the points. Wilke is also a fan of "smoothing," to show the "big picture," so I will try that as well.  
+
+```{r}
+## making my mango area chart
+mango_area <- vl_chart() %>% 
+  vl_encode_y('Production', type = "quantitative") %>% 
+  vl_add_data(mango_data_wide_region) %>%
+  vl_mark_area(fillOpacity = 0.7) %>% 
+  vl_encode_x('Year', type = "ordinal") %>%
+  vl_axis_x(title= '', labels = FALSE) %>% 
+  vl_encode_fill('Region:N') %>% 
+  vl_encode_tooltip('Region') %>%
+  vl_add_properties(title= "South Asia Historically Dominates Mango Production | FAOSTAT",
+                    width = 570,
+                    height = 300)
+  
+mango_bar <- vl_chart() %>% 
+  vl_add_data(mango_data_wide_region) %>%
+  vl_mark_bar() %>% 
+  vl_encode_x('Year', type = "ordinal") %>%
+  vl_encode_y('Area harvested', type = "quantitative") %>% 
+  vl_encode_fill('Region:N') %>% 
+  vl_add_properties(width = 570,
+                    height = 80)
+
+vl_vconcat(mango_area, mango_bar)
+
+
+```
+
+I also started messing around with some of of the regression features after starting with the visualization There is definitely a better way to code this...
+
+```{r}
+
+## DURING THE GREEN REVOLUTION ##
+
+rev_scatterplot <- vl_chart() %>% 
+  vl_add_data(mango_data_wide_country) %>%
+  vl_filter('datum.Year < 1986') %>% 
+  vl_mark_point() %>% 
+  ## encode x
+  vl_encode_x('Area harvested', type = "quantitative") %>%
+  vl_scale_x(type = 'log') %>% 
+  ## encode y
+  vl_encode_y('Production', type = "quantitative") %>%
+  vl_scale_y(type = 'log', domainMax = 100000000) %>% 
+  ## set default color
+  vl_encode_color(value = 'lightgray') %>%
+  vl_encode_tooltip('Country') %>%
+  vl_encode_opacity(value = 0.2) %>% 
+  ## removing gridlines
+  vl_axis_x(grid = FALSE) %>%
+  vl_axis_y(grid = FALSE)
+
+rev_regression <- vl_chart() %>%
+  vl_add_data(mango_data_wide_country) %>%
+  vl_filter('datum.Year < 1986') %>% 
+  vl_regression(regression = 'Production', on = 'Area harvested', method = 'pow') %>%
+  vl_encode_y('Production', type = "quantitative") %>%
+  vl_encode_x('Area harvested', type = "quantitative") %>%
+  vl_mark_line(color = 'firebrick')  
+
+green_revolution <- vl_layer(rev_scatterplot, rev_regression) %>%
+  vl_add_properties(height= 200, width = 200)
+
+```
+
+```{r}
+## AFTER THE GREEN REVOLUTION ##
+
+postrev_scatterplot <- vl_chart() %>% 
+  vl_add_data(mango_data_wide_country) %>%
+  vl_filter('datum.Year > 1986') %>% 
+  vl_mark_point() %>% 
+  ## encode x
+  vl_encode_x('Area harvested', type = "quantitative") %>%
+  vl_scale_x(type = 'log') %>% 
+  ## encode y
+  vl_encode_y('Production', type = "quantitative") %>%
+  vl_scale_y(type = 'log', domainMax = 100000000) %>% 
+  ## set default color
+  vl_encode_color(value = 'lightgray') %>%
+  vl_encode_tooltip('Country') %>%
+  vl_encode_opacity(value = 0.2) %>% 
+  ## removing gridlines
+  vl_axis_x(grid = FALSE) %>%
+  vl_axis_y(grid = FALSE)
+
+postrev_regression <- vl_chart() %>%
+  vl_add_data(mango_data_wide_country) %>%
+  vl_filter('datum.Year > 1986') %>% 
+  vl_regression(regression = 'Production', on = 'Area harvested', method = 'pow') %>%
+  vl_encode_y('Production', type = "quantitative") %>%
+  vl_encode_x('Area harvested', type = "quantitative") %>%
+  vl_mark_line(color = 'firebrick')  
+
+post_green_revolution <- vl_layer(postrev_scatterplot, postrev_regression) %>%
+  vl_add_properties(height= 200, width = 200)
+
+
+vl_hconcat(green_revolution, post_green_revolution)
+
+```
